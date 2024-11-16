@@ -17,7 +17,6 @@ class EditPost extends Component
         $this->post = $post_data;
         $this->post_title = $post_data->post_title;
         $this->content = $post_data->content;
-        $this->photo = $post_data->photo;
     }
 
     public function update(){
@@ -26,7 +25,7 @@ class EditPost extends Component
             'post_title' => 'required',
             'content' => 'required',
         ]);
-        if ($this->photo == null) {
+        if ($this->photo == null || $this->photo == '') { 
             Post::where('id',$this->post->id)->update([
                 'post_title' => $this->post_title,
                 'content' => $this->content,
