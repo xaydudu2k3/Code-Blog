@@ -331,6 +331,8 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
   <script src="{{ asset('js/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
+
 {{-- yes, so test again on browser --}}
 </body>
 

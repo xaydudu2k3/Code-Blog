@@ -61,7 +61,7 @@
                         <td>{{str($item->content)->words(10)}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
-                        <td><a href="/edit/post/{{$item->id}}" wire:navigate class="btn btn-primary btn-sm">Edit</a></td>
+                        <td><a href="/edit/post/{{$item->id}}" class="btn btn-primary btn-sm">Edit</a></td>
                         <td><button wire:click="deletePost({{$item->id}})" wire:confirm="Are you sure you want to delete this?" class="btn btn-danger btn-sm">Delete</button></td>
                       </tr>
                   @endforeach
