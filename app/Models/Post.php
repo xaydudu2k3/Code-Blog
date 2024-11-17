@@ -23,4 +23,12 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function views()
+    {
+        return $this->hasMany(PostViewers::class);
+    }
 }

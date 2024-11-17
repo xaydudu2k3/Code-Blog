@@ -1,9 +1,18 @@
-    <div class="row">
+    <div class="row g-3">
+        <div class="col-12 mb-3">
+            <!-- Dropdown for sorting posts -->
+            <select class="form-select" wire:model="sortOption">
+                <option value="latest">Mới nhất</option>
+                <option value="oldest">Cũ nhất</option>
+                <option value="most_viewed">Nhiều lượt xem nhất</option>
+            </select>
+        </div>
         {{-- here we will loop through all posts.. --}}
         @foreach ($posts as $post)
-            <div class="col-xl-4">
-                <div class="card">
-                    <img src="{{ asset('storage/images/' . $post->photo) }}" height="200px" alt="" class="card-img-top">
+            <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+                <div class="card h-100">
+                    <img src="{{ asset('storage/images/' . $post->photo) }}" height="200px" alt=""
+                        class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->post_title }}</h5>
                         <livewire:tags-component :postId="$post->id" />

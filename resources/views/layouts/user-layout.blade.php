@@ -62,7 +62,7 @@
                 <img src="assets/img/logo.png" alt="">
                 <span class="d-none d-lg-block">Blog App</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+            {{-- <i class="bi bi-list toggle-sidebar-btn"></i> --}}
         </div><!-- End Logo -->
 
         <div class="search-bar">
@@ -298,8 +298,25 @@
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">Pages</li>
 
+            <li class="nav-heading">Pages</li>
+            <li class="nav-item">
+                <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-tag"></i><span>Tags</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="tables-general.html" class="active">
+                            <i class="bi bi-circle"></i><span>General Tables</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tables-data.html">
+                            <i class="bi bi-circle"></i><span>Data Tables</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Tables Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/my/posts" wire:navigate>
                     <i class="bi bi-archive-fill"></i>
@@ -361,6 +378,7 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
     @livewireScripts
 
     <!-- Khu vực để thêm JavaScript từ các view con -->
