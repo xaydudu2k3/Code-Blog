@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <title>Code Blog</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -58,9 +58,9 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="/user/home" wire:navigate class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Blog App</span>
+                <span class="d-none d-lg-block">Code Blog</span>
             </a>
             {{-- <i class="bi bi-list toggle-sidebar-btn"></i> --}}
         </div><!-- End Logo -->
@@ -300,23 +300,7 @@
 
 
             <li class="nav-heading">Pages</li>
-            <li class="nav-item">
-                <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-tag"></i><span>Tags</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="tables-general.html" class="active">
-                            <i class="bi bi-circle"></i><span>General Tables</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tables-data.html">
-                            <i class="bi bi-circle"></i><span>Data Tables</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Tables Nav -->
+            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/my/posts" wire:navigate>
                     <i class="bi bi-archive-fill"></i>
@@ -329,7 +313,12 @@
                     <span>Profile</span>
                 </a>
             </li><!-- End Profile Page Nav -->
-
+            <li class="nav-item">
+                <a class="nav-link " id="toggleTags" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-tag"></i><span>Tags</span>
+                </a>
+                <livewire:tag-sidebar />
+            </li><!-- End Tables Nav -->
 
 
         </ul>

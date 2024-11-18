@@ -1,5 +1,6 @@
     <div class="row g-3">
-        <div class="col-12 mb-3">
+        <div class="col-6">{{ $tag_name }}</div>
+        <div class="col-6 mb-3">
             <!-- Dropdown for sorting posts -->
             <select class="form-select" wire:model="sortOption">
                 <option value="latest">Mới nhất</option>

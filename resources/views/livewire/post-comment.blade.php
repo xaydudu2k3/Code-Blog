@@ -14,7 +14,7 @@
         @foreach ($postComments as $item)
         <div class="row">
             <div class="col-1">
-                <img src="{{ asset('storage/images/' .$item->image) }}"  alt="" height="30px" width="30px" class="rounded-circle">
+                <livewire:profile-image :userId="$item->user_id" />
             </div>
             <div class="col-md-11">
                  <span class="text-capitalize">{{$item->name}}:</span> 
