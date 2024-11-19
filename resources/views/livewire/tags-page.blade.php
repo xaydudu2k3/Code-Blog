@@ -3,11 +3,18 @@
 
     <!-- Default box -->
     <div class="card">
-        <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="card-header align-items-center justify-content-between">
             <h1 class="card-title">Danh sách tag</h1>
-
-            <div class="card-tools">
-                <a href="/create/tag" class="btn btn-outline-danger mx-2 text-left">Create</a>
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="search-bar">
+                    <form class="search-form d-flex align-items-center" wire:submit.prevent="searchTag">
+                        <input type="text" name="search" wire:model="search" placeholder="Search" title="Enter search keyword">
+                        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+                <div class="card-tools">
+                    <a href="/create/tag" class="btn btn-outline-danger mx-2 text-left">Create</a>
+                </div>
             </div>
         </div>
         <div class="card-body">
