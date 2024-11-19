@@ -293,6 +293,10 @@
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
+        <a class="nav-link collapsed" href="/admin/tag">
+          <i class="bi bi-person"></i>
+          <span>Tag</span>
+        </a>
       </li><!-- End Profile Page Nav -->
     </ul>
 
