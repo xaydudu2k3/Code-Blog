@@ -2,18 +2,19 @@
         <div class="col-6">{{ $tag_name }}</div>
         <div class="col-6 mb-3">
             <!-- Dropdown for sorting posts -->
-            <select class="form-select" wire:model="sortOption">
-                <option value="latest">Mới nhất</option>
-                <option value="oldest">Cũ nhất</option>
-                <option value="most_viewed">Nhiều lượt xem nhất</option>
+            <select class="form-select" wire:model="sortOption" wire:change="updateSorting">
+                <option value="latest">Latest</option>
+                <option value="oldest">Oldest</option>
+                <option value="most_viewed">Most Viewed</option>
             </select>
         </div>
         {{-- here we will loop through all posts.. --}}
-        @foreach ($posts as $post)
-            <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+
+        @foreach ($pposts as $post)
+            <div class="col-xxl-4  col-md-6 col-sm-12 mb-4">
                 <div class="card h-100">
                     <img src="{{ asset('storage/images/' . $post->photo) }}" height="200px" alt=""
-                        class="card-img-top">
+                        class="card-img-top" style="object-fit: contain;">
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->post_title }}</h5>
                         <livewire:tags-component :postId="$post->id" />
@@ -38,5 +39,8 @@
                 </div>
             </div>
         @endforeach
+        <div class="d-flex justify-content-center">
+            {{ $pposts->links() }}
+        </div>
 
     </div>

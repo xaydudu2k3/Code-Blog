@@ -12,9 +12,12 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <link href="{{ asset('img/favicon.png') }}" rel="icon">
     <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS của Bootstrap Select -->
     <link rel="stylesheet"
@@ -32,6 +35,7 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/export-excel.min.js') }}"></script>
     <script src="{{ asset('row_merger/dist/row-merge-bundle.min.js') }}"></script>
+    @livewireStyles
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
@@ -62,13 +66,16 @@
                 <img src="assets/img/logo.png" alt="">
                 <span class="d-none d-lg-block">Code Blog</span>
             </a>
-            {{-- <i class="bi bi-list toggle-sidebar-btn"></i> --}}
+            <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
         <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
+            {{-- <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form> --}}
+            <form action="" class="d-flex" role="search">
+                <livewire:global-search />
             </form>
         </div><!-- End Search Bar -->
 
@@ -292,7 +299,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="/user/home" wire:navigate>
+                <a class="nav-link" href="/user/home" >
                     <i class="bi bi-grid"></i>
                     <span>Home page</span>
                 </a>
@@ -308,7 +315,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/profile" wire:navigate>
+                <a class="nav-link collapsed" href="/profile" >
                     <i class="bi bi-person"></i>
                     <span>Profile</span>
                 </a>
