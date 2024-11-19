@@ -34,7 +34,7 @@
                         @endif
                         <td>
                             <div class="d-flex justify-content-center">
-                                <a wire:navigate class="btn btn-primary btn-sm mx-1">Edit</a>
+                                <a href="/edit/tag/{{$tag->id}}" wire:navigate class="btn btn-primary btn-sm mx-1">Edit</a>
                                 <button class="btn btn-danger btn-sm mx-1" wire:click="deleteUser({{ $tag->id }})">Delete</button>
                             </div>
                         </td>

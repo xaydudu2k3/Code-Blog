@@ -23,4 +23,10 @@ class AdminController extends Controller
         $logged_user = Auth::user();
         return view('admin.create-tag', compact('logged_user'));
     }
+    public function loadEditTag($tag_id)
+    {
+        $logged_user = Auth::user();
+        $tag_data = Tag::find($tag_id);
+        return view('admin.edit-tag', compact('logged_user', 'tag_data'));
+    }
 }

@@ -40,3 +40,4 @@ Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile'
 Route::get('/admin/home', [AdminController::class, 'loadHomePage'])->middleware('admin');
 Route::get('/admin/tag', [AdminController::class, 'loadTagPage'])->middleware('admin');
 Route::get('create/tag', [AdminController::class, 'loadCreateTag'])->middleware('admin');
+Route::get('/edit/tag/{tag_id}', [AdminController::class, 'loadEditTag'])->middleware('admin');
