@@ -289,11 +289,18 @@
 
       <li class="nav-heading">Pages</li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="/admin/profile" wire:navigate>
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin/posts" wire:navigate>
+            <i class="bi bi-archive-fill"></i>
+            <span>All Posts</span>
+        </a>
+    </li>
+
     </ul>
 
   </aside><!-- End Sidebar-->
