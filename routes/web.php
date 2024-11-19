@@ -38,3 +38,4 @@ Route::get('/profile', [UserController::class, 'loadProfile'])->middleware('user
 Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile'])->middleware('user');
 
 Route::get('/admin/home', [AdminController::class, 'loadHomePage'])->middleware('admin');
+Route::get('/admin/tag', [AdminController::class, 'loadTagPage'])->middleware('admin');
