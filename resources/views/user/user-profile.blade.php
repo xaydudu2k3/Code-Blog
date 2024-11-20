@@ -1,6 +1,6 @@
 @extends('layouts/user-layout')
 @section('space-work')
 <div class="container">
-    <livewire:user-profile />
+    <livewire:user-profile/>
 </div>
 @endsection

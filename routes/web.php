@@ -34,9 +34,14 @@ Route::get('my/posts', [UserController::class, 'loadMyPosts'])->middleware('user
 Route::get('create/post', [UserController::class, 'loadCreatePost'])->middleware('user');
 Route::get('/edit/post/{post_id}', [UserController::class, 'loadEditPost'])->middleware('user');
 Route::get('/view/post/{id}', [UserController::class, 'loadPostPage'])->middleware('user');
-Route::get('/profile', [UserController::class, 'loadProfile'])->middleware('user');
+Route::get('/profile', [UserController::class, 'loadProfile'])->middleware('user') -> name('profile.user');
 Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile'])->middleware('user');
 
 Route::get('/admin/home', [AdminController::class, 'loadHomePage'])->middleware('admin');
+Route::get('/admin/profile', [AdminController::class, 'loadProfile'])->middleware('admin') -> name('profile.admin');
+Route::get('/admin/view/profile/{user_id}', [AdminController::class, 'loadGuestProfile'])->middleware('admin');
+Route::get('/admin/posts', [AdminController::class, 'loadAllPosts'])->middleware('admin');
+Route::get('/admin/view/post/{user_id}', [AdminController::class, 'loadPostPage'])->middleware('admin');
+// Route::get('/admin/profile/change-password', [AdminController::class, 'changePassword'])->middleware('admin');
 Route::get('/admin/tag', [AdminController::class, 'loadTagPage'])->middleware('admin');
 Route::get('create/tag', [AdminController::class, 'loadCreateTag'])->middleware('admin');

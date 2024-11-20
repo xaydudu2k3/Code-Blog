@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\UserProfile;
+use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileDetailsEdit extends Component
 {
@@ -56,8 +58,13 @@ class ProfileDetailsEdit extends Component
         $updateUsersTable = User::where('id',auth()->user()->id)->update([
             'name' => $this->fullName
         ]);
-        // this ensure image is updated
-        return $this->redirect('/profile',navigate: true);
+        
+        if(auth()->user()->role === 1) {
+            return $this->redirect(route('profile.admin'), navigate: true);
+        }
+        
+        return $this->redirect(route('profile.user'), navigate: true);
+        
     }
     public function render()
     {
