@@ -58,7 +58,7 @@ class ViewPostComponent extends Component
         $tag_name = Tag::find($this->tag_id)->name ?? "";
 
         $post_pag = Post::join('users', 'users.id', '=', 'posts.user_id')
-            ->select('users.name', 'users.id as followedId', 'posts.*');
+            ->select('users.name', 'users.id as followedId', 'posts.*')->where('posts.active', 1);
 
         if ($this->tag_id) {
             $post_pag = $post_pag->whereHas('tags', function ($query) {

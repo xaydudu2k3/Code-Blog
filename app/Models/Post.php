@@ -13,6 +13,12 @@ class Post extends Model
         'post_title',
         'content',
         'user_id',
+        'active',   // Thêm cột active
+        'publish',  // Thêm cột publish
+    ];
+    protected $casts = [
+        'active' => 'boolean',
+        'publish' => 'datetime',
     ];
 
     public function likes()
