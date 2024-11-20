@@ -45,3 +45,5 @@ Route::get('/admin/view/post/{user_id}', [AdminController::class, 'loadPostPage'
 // Route::get('/admin/profile/change-password', [AdminController::class, 'changePassword'])->middleware('admin');
 Route::get('/admin/tag', [AdminController::class, 'loadTagPage'])->middleware('admin');
 Route::get('create/tag', [AdminController::class, 'loadCreateTag'])->middleware('admin');
+Route::get('/edit/tag/{tag_id}', [AdminController::class, 'loadEditTag'])->middleware('admin');
+
