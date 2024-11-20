@@ -34,6 +34,7 @@ Route::get('my/posts', [UserController::class, 'loadMyPosts'])->middleware('user
 Route::get('create/post', [UserController::class, 'loadCreatePost'])->middleware('user');
 Route::get('/edit/post/{post_id}', [UserController::class, 'loadEditPost'])->middleware('user');
 Route::get('/view/post/{id}', [UserController::class, 'loadPostPage'])->middleware('user');
+Route::get('/home/tag/{tag_id}', [UserController::class, 'loadHomePagewithTag'])->middleware('user');
 Route::get('/profile', [UserController::class, 'loadProfile'])->middleware('user') -> name('profile.user');
 Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile'])->middleware('user');
 
