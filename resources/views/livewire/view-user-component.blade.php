@@ -19,7 +19,7 @@
                 <span>{{ $user->name }} ({{ $user->email }})</span>
                 <div>
                     <a href="/admin/view/profile/{{ $user->id }}" wire:navigate class="btn btn-primary btn-sm mx-2">View</a>
-                    <button class="btn btn-danger btn-sm" wire:click="deleteUser({{ $user->id }})">Delete</button>
+                    <button wire:confirm="Are you sure you want to delete this?" class="btn btn-danger btn-sm" wire:click="deleteUser({{ $user->id }}) ">Delete</button>
                 </div>
             </div>
         @endforeach

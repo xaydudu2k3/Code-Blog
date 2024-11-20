@@ -37,4 +37,7 @@ class Post extends Model
     {
         return $this->hasMany(PostViewers::class);
     }
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

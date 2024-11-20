@@ -11,6 +11,7 @@
         {{-- here we will loop through all posts.. --}}
 
         @foreach ($pposts as $post)
+            @if ($post->active)
             <div class="col-xxl-4  col-md-6 col-sm-12 mb-4">
                 <div class="card h-100">
                     <img src="{{ asset('storage/images/' . $post->photo) }}" height="200px" alt=""
@@ -38,6 +39,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         @endforeach
         <div class="d-flex justify-content-center">
             {{ $pposts->links() }}
