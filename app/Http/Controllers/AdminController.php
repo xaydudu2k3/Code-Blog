@@ -64,4 +64,5 @@ class AdminController extends Controller
         $user_image = $user_profile_data->image ?? 'images_default.jpg';
         return view('admin.view-post', compact('logged_user', 'post_data', 'user_image'));
     }
+    
 }
