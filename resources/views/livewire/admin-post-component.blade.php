@@ -16,10 +16,11 @@
     <div class="list-group">
         <div class="list-group-item">
             <div class="row font-weight-bold">
-                <div class="col-md-2">Title</div>
-                <div class="col-md-3">User</div>
-                <div class="col-md-4">Content</div>
-                <div class="col-md-3 text-center">Action</div>
+                <div class="col-md-2"><b>Image</b></div>
+                <div class="col-md-2"><b>Title</b></div>
+                <div class="col-md-2"><b>User</b></div>
+                <div class="col-md-3"><b>Content</b></div>
+                <div class="col-md-3 text-center"><b>Action</b></div>
             </div>
         </div>
        
@@ -29,15 +30,19 @@
                 <div class="row align-items-center">
 
                     <div class="col-md-2">
+                        <img height="40px" width="40px" src="{{ asset('storage/images/' .$post->photo.'') }}" alt="post image">
+                    </div>
+                    
+                    <div class="col-md-2">
                         {{ $post->post_title }}
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         {{ $post->user->name ?? 'N/A' }}
                         
                     </div>
                     
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         {{ $post->content }}
                     </div>
 

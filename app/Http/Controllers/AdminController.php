@@ -64,5 +64,10 @@ class AdminController extends Controller
         $user_image = $user_profile_data->image ?? 'images_default.jpg';
         return view('admin.view-post', compact('logged_user', 'post_data', 'user_image'));
     }
-    
+    public function loadUserComment($user_id) {
+        $logged_user = Auth::user();
+        $userId = $user_id;
+        return view('admin.user-comment',compact('logged_user', 'userId'));
+
+    }
 }
