@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserProfile;
@@ -9,9 +10,21 @@ use App\Models\Post;
 
 class AdminController extends Controller
 {
-    public function loadHomePage(){
+
+    public function loadHomePage()
+    {
         $logged_user = Auth::user();
-        return view('admin.home-page',compact('logged_user'));
+        return view('admin.home-page', compact('logged_user'));
+    }
+    public function loadTagPage()
+    {
+        $logged_user = Auth::user();
+        return view('admin.tags-page', compact('logged_user'));
+    }
+    public function loadCreateTag()
+    {
+        $logged_user = Auth::user();
+        return view('admin.create-tag', compact('logged_user'));
     }
     public function loadProfile()
     {
