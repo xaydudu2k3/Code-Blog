@@ -1,11 +1,11 @@
-@extends('layouts/user-layout')
+@extends('layouts/admin-layout')
 @section('space-work')
     <div class="container">
         <div class="row">
             <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body">
-                        <img src="{{ asset('storage/images/' .$post_data->photo) }}" style="height: 300px; object-fit: contain;"  alt="" class="card-img-top">
+                        <img src="{{ asset('storage/images/' .$post_data->photo) }}"  alt="" class="card-img-top">
                         <div class="row my-2">
                             <div class="col-xl-6">
                                 {{-- here we will pass on which day the post was published --}}
