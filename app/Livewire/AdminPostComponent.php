@@ -35,8 +35,7 @@ class AdminPostComponent extends Component
         } else {
             session()->flash('error', 'Post not found!');
         }
-
-        return $this->redirect('/admin/posts', navigate: true);
+        $this->posts = Post::all();
     }
     public function render()
     {

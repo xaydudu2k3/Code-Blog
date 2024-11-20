@@ -8,15 +8,22 @@ use Livewire\Component;
 class GuestProfileView extends Component
 {
     public $user_data;
+    public $admin;
+    public $guestId;
 
     public function mount($guestId){
         $this->user_data = User::join('user_profiles','user_profiles.user_id','=','users.id')
         ->where('user_profiles.user_id',$guestId) //here will be the id of the other user/post publisher
         ->first();
-       // dd($this->user_data);
+        if(auth()->user()->role === 1) $this->admin = true;
+        else $this->admin = false;
+        $this->guestId = $guestId;
     }
     public function render()
     {
-        return view('livewire.guest-profile-view');
+        return view('livewire.guest-profile-view', [
+            'admin' => "$this->admin",
+            'guestId' => "$this->guestId"
+        ]);
     }
 }

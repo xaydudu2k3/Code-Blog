@@ -42,6 +42,7 @@ Route::get('/admin/profile', [AdminController::class, 'loadProfile'])->middlewar
 Route::get('/admin/view/profile/{user_id}', [AdminController::class, 'loadGuestProfile'])->middleware('admin');
 Route::get('/admin/posts', [AdminController::class, 'loadAllPosts'])->middleware('admin');
 Route::get('/admin/view/post/{user_id}', [AdminController::class, 'loadPostPage'])->middleware('admin');
+Route::get('/admin/view/comment/{user_id}', [AdminController::class, 'loadUserComment'])->middleware('admin');
 
 // Route::get('/admin/profile/change-password', [AdminController::class, 'changePassword'])->middleware('admin');
 Route::get('/admin/tag', [AdminController::class, 'loadTagPage'])->middleware('admin');
