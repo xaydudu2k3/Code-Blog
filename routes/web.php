@@ -50,3 +50,4 @@ Route::get('/admin/tag', [AdminController::class, 'loadTagPage'])->middleware('a
 Route::get('create/tag', [AdminController::class, 'loadCreateTag'])->middleware('admin');
 Route::get('/edit/tag/{tag_id}', [AdminController::class, 'loadEditTag'])->middleware('admin');
 Route::get('/admin/view/guestpost/{user_id}', [AdminController::class, 'loadGuestPosts'])->middleware('admin');
+Route::get('/admin/create/post', [AdminController::class, 'loadCreatePost'])->middleware('admin');

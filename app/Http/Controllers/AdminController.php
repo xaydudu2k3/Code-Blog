@@ -76,4 +76,11 @@ class AdminController extends Controller
         $logged_user = Auth::user();
         return view('admin.guest-posts', compact('logged_user', 'user_id'));
     }
+    public function loadCreatePost()
+    {
+        $logged_user = Auth::user();
+        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+        $user_image = $user_profile_data->image ?? 'images_default.jpg';
+        return view('admin.create-post', compact('logged_user', 'user_image'));
+    }
 }

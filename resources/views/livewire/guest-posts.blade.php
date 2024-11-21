@@ -8,7 +8,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="search-bar">
                     <form class="search-form d-flex align-items-center" wire:submit.prevent="searchTag">
-                        <input type="text" name="search" wire:model="search" placeholder="Search conent" title="Enter search keyword">
+                        <input type="text" name="search" wire:model="search" placeholder="Search title" title="Enter search keyword">
                         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
