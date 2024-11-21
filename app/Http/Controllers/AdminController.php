@@ -70,4 +70,9 @@ class AdminController extends Controller
         return view('admin.user-comment',compact('logged_user', 'userId'));
 
     }
+    public function loadCommentPage()
+    {
+        $logged_user = Auth::user();
+        return view('admin.comment-page', compact('logged_user'));
+    }
 }
