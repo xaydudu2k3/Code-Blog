@@ -18,6 +18,14 @@ class GuestProfileView extends Component
         if(auth()->user()->role === 1) $this->admin = true;
         else $this->admin = false;
         $this->guestId = $guestId;
+        if (auth()->user()->id == $this->guestId) {
+            if ($this->admin) {
+                return redirect()->route('profile.admin');
+            }
+            else {
+                return redirect()->route('profile.user');
+            }
+        }
     }
     public function render()
     {

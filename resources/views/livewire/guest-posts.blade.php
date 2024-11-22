@@ -4,12 +4,32 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header align-items-center justify-content-between">
-            <h1 class="card-title">List Posts by {{ $name }}</h1>
+            <h1 class="card-title">List Posts by {{ $name }}: {{ $count }}</h1>
             <div class="d-flex align-items-center justify-content-between">
                 <div class="search-bar">
                     <form class="search-form d-flex align-items-center" wire:submit.prevent="searchTag">
-                        <input type="text" name="search" wire:model="search" placeholder="Search title" title="Enter search keyword">
-                        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                        <div class="position-relative">
+                            <input 
+                                type="text" 
+                                name="search" 
+                                wire:model="search" 
+                                placeholder="Search" 
+                                title="Enter search keyword" 
+                                class="form-control"
+                            >
+                            @if ($search)
+                                <button 
+                                    type="button" 
+                                    class="btn btn-clear position-absolute end-0 top-0" 
+                                    style="border: none; background: transparent; padding: 0.5rem;" 
+                                    wire:click="clearSearch">
+                                    ✖
+                                </button>
+                            @endif
+                        </div>
+                        <button type="submit" title="Search" class="btn btn-primary ms-2">
+                            <i class="bi bi-search"></i>
+                        </button>
                     </form>
                 </div>
             </div>

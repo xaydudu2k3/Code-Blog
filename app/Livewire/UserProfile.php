@@ -8,13 +8,16 @@ use Livewire\Component;
 class UserProfile extends Component
 {
     public $user_data;
+    public $id;
+    public $role;
 
 
     public function mount(){
+        $this->id = auth()->user()->id;
+        $this->role = auth()->user()->role;
         $this->user_data = User::join('user_profiles','user_profiles.user_id','=','users.id')
         ->where('user_profiles.user_id',auth()->user()->id)
         ->first();
-
     }
 
      public function placeholder(){
@@ -28,6 +31,9 @@ class UserProfile extends Component
 
     public function render()
     {
-        return view('livewire.user-profile');
+        return view('livewire.user-profile', [
+            "id" => "$this->id",
+            "role" => "$this->role"
+        ]);
     }
 }

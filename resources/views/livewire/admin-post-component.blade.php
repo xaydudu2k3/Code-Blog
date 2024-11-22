@@ -1,5 +1,31 @@
 <div class="container mt-4">
-    <h3 class="mb-3">List Posts</h3>
+    <h3 class="mb-3">List Posts: {{ $count }}</h3>
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" wire:submit.prevent="searchComment">
+            <div class="position-relative">
+                <input 
+                    type="text" 
+                    name="search" 
+                    wire:model="search" 
+                    placeholder="Search" 
+                    title="Enter search keyword" 
+                    class="form-control"
+                >
+                @if ($search)
+                    <button 
+                        type="button" 
+                        class="btn btn-clear position-absolute end-0 top-0" 
+                        style="border: none; background: transparent; padding: 0.5rem;" 
+                        wire:click="clearSearch">
+                        ✖
+                    </button>
+                @endif
+            </div>
+            <button type="submit" title="Search" class="btn btn-primary ms-2">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+    </div>
 
     @if (session()->has('message'))
         <div class="alert alert-success">
