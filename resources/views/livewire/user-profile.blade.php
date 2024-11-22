@@ -104,9 +104,14 @@
             {{-- @if ($admin) --}}
             <div class="social-buttons mt-4">
                 <a href="#" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
+                @if ($role) 
+                <a href="/admin/view/guestpost/{{ $id }}" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
+                @else
                 <a href="/my/posts" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
+                @endif
                 <a href="#" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
-                <a href="/my/comments/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
+                <a href="{{ $role ? '/admin/view/comment' : '/my/comments' }}/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
+                {{-- <a href="/my/comments/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a> --}}
             </div>
             {{-- @endif --}}
         </div>
