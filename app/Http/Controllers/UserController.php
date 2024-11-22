@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\UserProfile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,5 +78,13 @@ class UserController extends Controller
         $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
         $user_image = $user_profile_data->image ?? 'images_default.jpg';
         return view('user.guest-profile', compact('logged_user', 'guest_id', 'user_image'));
+    }
+    public function loadMyComments($user_Id)
+    {
+        $logged_user = Auth::user();
+        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+        $user_image = $user_profile_data->image ?? 'images_default.jpg';
+        $userId = $user_Id;
+        return view('user.my-comment', compact('logged_user', 'user_image', 'userId'));
     }
 }

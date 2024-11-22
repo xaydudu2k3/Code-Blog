@@ -59,10 +59,10 @@
                             Delete
                         </button>
                         @if ($comment->post)
-                        <a href="/admin/view/post/{{ $comment->post->id }}"
+                        <a href="{{ $role ? '/admin/view/post' : '/view/post' }}/{{ $comment->post->id }}"
                             class="btn btn-primary btn-sm">
                             View Post
-                        </a>
+                         </a>
                         @endif
                     </td>
                 </tr>

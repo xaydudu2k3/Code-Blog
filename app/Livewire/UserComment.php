@@ -15,16 +15,17 @@ class UserComment extends Component
     public $count;
     public $search = '';
     public $userId;
+    public $role;
 
     public function mount($userId)
     {
       
         $this->cmts = Comment::where('user_id', $userId)
             ->with('post') 
-
             ->orderByDesc('created_at')
             ->get();
         $this->name = User::find($userId)->name;
+        $this->role = auth()->user()->role;
         $this->count = $this->cmts->count();
         $this->userId = $userId;
     }
@@ -44,9 +45,6 @@ class UserComment extends Component
     }
     public function searchComment()
     {
-        // Tìm kiếm các Comment theo giá trị search
-        // $this->cmts= Comment::where('comment', 'like', '%' . $this->search . '%')->get();
-
         $this->cmts = Comment::where('user_id', $this->userId)
             ->where('comment', 'like', '%' . $this->search . '%')
             ->get();
@@ -56,7 +54,7 @@ class UserComment extends Component
     public function clearSearch()
     {
         $this->search = '';
-        $this->searchComment(); // Làm mới danh sách comment
+        $this->searchComment(); 
     }
 
     public function render()
@@ -65,7 +63,8 @@ class UserComment extends Component
             'comments' => $this->cmts,
             'name' => $this->name,
             'count' =>"$this->count",
-            "search" => "$this->search"
+            "search" => "$this->search",
+            "role" => "$this->role"
         ]);
     }
 }

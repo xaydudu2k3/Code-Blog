@@ -37,6 +37,7 @@ Route::get('/view/post/{id}', [UserController::class, 'loadPostPage'])->middlewa
 Route::get('/home/tag/{tag_id}', [UserController::class, 'loadHomePagewithTag'])->middleware('user');
 Route::get('/profile', [UserController::class, 'loadProfile'])->middleware('user')->name('profile.user');
 Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile'])->middleware('user');
+Route::get('my/comments/{id}', [UserController::class, 'loadMyComments'])->middleware('user');
 
 Route::get('/admin/home', [AdminController::class, 'loadHomePage'])->middleware('admin');
 Route::get('/admin/profile', [AdminController::class, 'loadProfile'])->middleware('admin')->name('profile.admin');

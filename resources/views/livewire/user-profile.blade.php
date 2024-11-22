@@ -1,13 +1,82 @@
- {{-- here we can check if logged user is the one with the profile then, if yes
-    give access to edit otherwise just show a profile only.
-    
-    this approach seems to have an issue let's sort it out in this way.. --}}
+<style>
+  .social-links .social-icon {
+      font-size: 1.5rem;
+      color: #555;
+      transition: color 0.3s, transform 0.3s;
+  }
+
+  .social-links .social-icon:hover {
+      color: #007bff;
+      transform: scale(1.2);
+  }
+
+  .social-buttons {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      justify-items: center;
+      margin-top: 20px;
+  }
+
+  .social-buttons a {
+      display: inline-block;
+      font-size: 0.9rem;
+      /* Giảm kích thước font */
+      font-weight: 600;
+      padding: 8px 12px;
+      /* Giảm khoảng cách padding */
+      border-radius: 8px;
+      text-decoration: none;
+      width: 120px;
+      /* Thu nhỏ width của nút */
+      text-align: center;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-like {
+      background-color: #0d6efd;
+  }
+
+  .btn-like:hover {
+      background-color: #084298;
+      transform: scale(1.05);
+  }
+
+  .btn-post {
+      background-color: #198754;
+  }
+
+  .btn-post:hover {
+      background-color: #146c43;
+      transform: scale(1.05);
+  }
+
+  .btn-follow {
+      background-color: #ffc107;
+      color: black;
+  }
+
+  .btn-follow:hover {
+      background-color: #d39e00;
+      transform: scale(1.05);
+  }
+
+  .btn-comment {
+      background-color: #17a2b8;
+  }
+
+  .btn-comment:hover {
+      background-color: #117a8b;
+      transform: scale(1.05);
+  }
+</style>
        <div class="row">
         <div class="col-xl-4">
-          <div class="card">
+          {{-- <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                 <img height="200px" width="200px" class="rounded" src="{{ asset('storage/images/'.($user_data->image ?? 'images_default.jpg')) }}" alt="profile image">
-              {{-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
               <h2>{{$user_data->name ?? ''}}</h2>
               <h4 class="text-muted">{{$user_data->job ?? ''}}</h4>
               <div class="social-links mt-2">
@@ -17,8 +86,30 @@
                 <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
-          </div>
+          </div> --}}
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                <img height="100px" width="100px" class="rounded-circle"
 
+                    src="{{ asset('storage/images/' . $user_data->image ?? "image_default.jpg")  }}" alt="profile image">
+                <h2>{{ $user_data->name ?? '' }}</h2>
+                <h4 class="text-muted">{{ $user_data->job }}</h4>
+                <div class="social-links mt-2 d-flex justify-content-center gap-4">
+                    <a href="#" class="social-icon twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-icon facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-icon instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-icon linkedin"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            {{-- @if ($admin) --}}
+            <div class="social-buttons mt-4">
+                <a href="#" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
+                <a href="/my/posts" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
+                <a href="#" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
+                <a href="/my/comments/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
+            </div>
+            {{-- @endif --}}
+        </div>
         </div>
 
         <div class="col-xl-8">
