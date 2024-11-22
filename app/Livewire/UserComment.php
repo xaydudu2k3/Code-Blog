@@ -19,6 +19,7 @@ class UserComment extends Component
       
         $this->cmts = Comment::where('user_id', $userId)
             ->with('post') 
+
             ->orderByDesc('created_at')
             ->get();
         $this->name = User::find($userId)->name;

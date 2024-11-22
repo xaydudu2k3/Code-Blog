@@ -22,7 +22,8 @@ class ViewPostComponent extends Component
     }
     public function updateSorting()
     {
-        // Không cần làm gì thêm, Livewire sẽ tự động gọi lại phương thức render()
+        // recall render()
+        return redirect(request()->header('Referer'));
     }
     public function addViewers($postId)
     {
