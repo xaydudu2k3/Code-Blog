@@ -4,55 +4,101 @@ namespace App\Livewire;
 
 use App\Models\Comment;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class PostComment extends Component
 {
-    public $post_id; // ID của bài viết
-    public $comment = ''; // Nội dung bình luận người dùng nhập
-    public $postComments; // Danh sách bình luận của bài viết
-    public $loadedComments = 4; // Số lượng bình luận tải mỗi lần
-    public $totalCommentsCount; // Tổng số lượng bình luận
+    public $post_id;
+    public $comment = '';
+    public $postComments;
+    public $loadedComments = 4;
+    public $totalCommentsCount;
+    public $editingCommentId = null;
+    public $editingCommentContent = '';
 
     public function mount($postId)
     {
         $this->post_id = $postId;
-        $this->loadComments(); // Gọi phương thức tải bình luận ban đầu
+        $this->loadComments();
         $this->totalCommentsCount = Comment::where('post_id', $this->post_id)->count();
     }
 
     public function loadComments()
     {
-        // Lấy danh sách bình luận có giới hạn
         $this->postComments = Comment::join('users', 'users.id', '=', 'comments.user_id')
             ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
             ->where('post_id', $this->post_id)
             ->orderBy('comments.created_at', 'desc')
             ->take($this->loadedComments)
-            ->get(['users.name', 'comments.*', 'user_profiles.image']);
+            ->get(['users.name', 'comments.*', 'user_profiles.image as avatar']);
     }
 
     public function loadMoreComments()
     {
-        $this->loadedComments += 4; // Tăng số bình luận được tải
-        $this->loadComments(); // Tải thêm bình luận
+        $this->loadedComments += 4;
+        $this->loadComments();
     }
 
     public function leaveComment()
     {
         $this->validate([
-            'comment' => 'required|min:1',
+            'comment' => 'required',
         ]);
 
-        // Lưu bình luận mới
         Comment::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => Auth::user()->id,
             'post_id' => $this->post_id,
             'comment' => $this->comment,
         ]);
 
-        $this->comment = ''; // Reset ô nhập
-        $this->loadComments(); // Cập nhật lại danh sách bình luận
-        $this->totalCommentsCount++; // Tăng tổng số lượng bình luận
+        $this->comment = '';
+        $this->loadComments();
+        $this->totalCommentsCount++;
+    }
+
+    public function editComment($commentId)
+    {
+        $comment = Comment::find($commentId);
+        if ($comment && $comment->user_id === Auth::id()) {
+            $this->editingCommentId = $commentId;
+            $this->editingCommentContent = $comment->comment;
+        }
+        $this->loadComments();
+    }
+    public function cancel()
+    {
+        $this->editingCommentId = null;
+        $this->loadComments();
+    }
+
+    public function updateComment()
+    {
+        $this->validate([
+            'editingCommentContent' => 'required',
+        ]);
+
+        $comment = Comment::find($this->editingCommentId);
+        if ($comment && $comment->user_id === Auth::id()) {
+            $comment->update([
+                'comment' => $this->editingCommentContent,
+                'updated_at' => now(),
+            ]);
+        }
+
+        $this->editingCommentId = null;
+        $this->editingCommentContent = '';
+        $this->loadComments();
+    }
+
+    public function deleteComment($commentId)
+    {
+        $comment = Comment::find($commentId);
+        if ($comment && $comment->user_id === Auth::id()) {
+            $comment->delete();
+        }
+
+        $this->loadComments();
+        $this->totalCommentsCount--;
     }
 
     public function render()
