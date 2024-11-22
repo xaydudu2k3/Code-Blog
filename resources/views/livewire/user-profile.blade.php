@@ -74,19 +74,7 @@
 </style>
        <div class="row">
         <div class="col-xl-4">
-          {{-- <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                <img height="200px" width="200px" class="rounded" src="{{ asset('storage/images/'.($user_data->image ?? 'images_default.jpg')) }}" alt="profile image">
-              <h2>{{$user_data->name ?? ''}}</h2>
-              <h4 class="text-muted">{{$user_data->job ?? ''}}</h4>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div> --}}
+         
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                 <img height="100px" width="100px" class="rounded-circle"
@@ -101,7 +89,6 @@
                     <a href="#" class="social-icon linkedin"><i class="bi bi-linkedin"></i></a>
                 </div>
             </div>
-            {{-- @if ($admin) --}}
             <div class="social-buttons mt-4">
                 <a href="#" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
                 @if ($role) 
@@ -111,9 +98,8 @@
                 @endif
                 <a href="#" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
                 <a href="{{ $role ? '/admin/view/comment' : '/my/comments' }}/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
-                {{-- <a href="/my/comments/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a> --}}
+               
             </div>
-            {{-- @endif --}}
         </div>
         </div>
 

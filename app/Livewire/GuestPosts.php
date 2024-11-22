@@ -11,7 +11,7 @@ class GuestPosts extends Component
     public $user_id;
     public $name;
     public $search = '';
-
+    public $count;
     public function mount($user_id)
     {
         $this->user_id = $user_id;
@@ -44,6 +44,11 @@ class GuestPosts extends Component
             session()->flash('error', 'Post not found!');
         }
     }
+    public function clearSearch()
+    {
+        $this->search = '';
+        $this->searchTag(); 
+    }
     public function render()
     {
         $posts = Post::join('users', 'users.id', '=', 'posts.user_id')
@@ -51,10 +56,11 @@ class GuestPosts extends Component
             ->where('posts.post_title', 'like', '%' . $this->search . '%')
             ->orderBy('posts.created_at', 'desc')
             ->paginate(6, ['posts.*']);
-
+            $this->count = $posts->count();
         return view('livewire.guest-posts', [
             'posts' => $posts,
-            'name' => $this->name
+            'name' => $this->name,
+            'count' => "$this->count"
         ]);
     }
 }
