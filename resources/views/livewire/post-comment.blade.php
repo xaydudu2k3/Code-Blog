@@ -9,24 +9,52 @@
     </form>
 
     <!-- Hiển thị danh sách bình luận -->
-    @foreach ($postComments as $item)
-        <div class="row my-3">
-            <div class="col-1">
-                <livewire:profile-image :userId="$item->user_id" />
-            </div>
-            <div class="col-11">
-                <span class="fw-bold">{{ $item->name }}:</span>
-                <p class="mb-1">{{ $item->comment }}</p>
-                <span class="text-muted small">{{ $item->created_at->diffForHumans() }}</span>
-            </div>
+    @foreach($postComments as $comment)
+    <div class="comment-item mt-4 d-flex align-items-start" wire:key="comment-{{ $comment->id }}">
+        <div class="avata me-3">
+            <img src="{{ asset('storage/images/' .$comment->avatar) }}" height="30px" width="30px" alt="" class="rounded-circle">
         </div>
-        <hr>
+        <div class="comment-content flex-grow-1">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <strong>{{ $comment->name }}</strong>
+                    <p>{{ $comment->comment }}</p>
+                    <small class="text-muted">
+                        @if($comment->updated_at != $comment->created_at)
+                        (Edited {{ $comment->updated_at->diffForHumans() }})
+                        @else
+                        {{ $comment->created_at->diffForHumans() }}
+                        @endif
+                    </small>
+                </div>
+                @if($comment->user_id === auth()->id())
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" wire:click="editComment({{ $comment->id }})">Edit</a></li>
+                        <li><a class="dropdown-item text-danger" wire:click="deleteComment({{ $comment->id }})">Delete</a></li>
+                    </ul>
+                </div>
+                @endif
+            </div>
+            @if($editingCommentId === $comment->id)
+            <div>
+                <textarea class="form-control" wire:model.defer="editingCommentContent"></textarea>
+                <div class="mt-2">
+                    <button class="btn btn-primary btn-sm" wire:click="updateComment">Save</button>
+                    <button class="btn btn-secondary btn-sm" wire:click="cancel">Cancel</button>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
+    <hr>
     @endforeach
 
     <!-- Nút "Xem thêm bình luận" -->
-    @if ($totalCommentsCount > $loadedComments)
-        <button class="btn btn-outline-primary btn-sm mt-3 float-end" wire:click="loadMoreComments">
-            More comments
-        </button>
+    @if($totalCommentsCount > count($postComments))
+    <button class="btn btn-link" wire:click="loadMoreComments">Load more comments</button>
     @endif
 </div>
