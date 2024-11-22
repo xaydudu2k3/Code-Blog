@@ -14,6 +14,7 @@ class UserComment extends Component
     public $name;
     public $count;
     public $search = '';
+    public $userId;
 
     public function mount($userId)
     {
@@ -25,6 +26,7 @@ class UserComment extends Component
             ->get();
         $this->name = User::find($userId)->name;
         $this->count = $this->cmts->count();
+        $this->userId = $userId;
     }
 
     public function deleteComment($commentId)
@@ -40,12 +42,30 @@ class UserComment extends Component
         }
         $this->count = $this->cmts->count();
     }
+    public function searchComment()
+    {
+        // Tìm kiếm các Comment theo giá trị search
+        // $this->cmts= Comment::where('comment', 'like', '%' . $this->search . '%')->get();
+
+        $this->cmts = Comment::where('user_id', $this->userId)
+            ->where('comment', 'like', '%' . $this->search . '%')
+            ->get();
+        $this->count = $this->cmts->count();
+    }
+
+    public function clearSearch()
+    {
+        $this->search = '';
+        $this->searchComment(); // Làm mới danh sách comment
+    }
+
     public function render()
     {
         return view('livewire.user-comment', [
             'comments' => $this->cmts,
             'name' => $this->name,
-            'count' =>"$this->count"
+            'count' =>"$this->count",
+            "search" => "$this->search"
         ]);
     }
 }
