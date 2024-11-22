@@ -49,5 +49,11 @@ Route::get('/admin/view/comment/{user_id}', [AdminController::class, 'loadUserCo
 Route::get('/admin/tag', [AdminController::class, 'loadTagPage'])->middleware('admin');
 Route::get('create/tag', [AdminController::class, 'loadCreateTag'])->middleware('admin');
 Route::get('/edit/tag/{tag_id}', [AdminController::class, 'loadEditTag'])->middleware('admin');
+
 Route::get('/admin/view/guestpost/{user_id}', [AdminController::class, 'loadGuestPosts'])->middleware('admin');
 Route::get('/admin/create/post', [AdminController::class, 'loadCreatePost'])->middleware('admin');
+
+Route::get('/admin/comment', [AdminController::class, 'loadCommentPage'])->middleware('admin');
+
+
+

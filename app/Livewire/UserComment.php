@@ -13,12 +13,15 @@ class UserComment extends Component
     public $cmts;
     public $name;
     public $count;
+    public $search = '';
 
     public function mount($userId)
     {
       
         $this->cmts = Comment::where('user_id', $userId)
             ->with('post') 
+
+            ->orderByDesc('created_at')
             ->get();
         $this->name = User::find($userId)->name;
         $this->count = $this->cmts->count();
@@ -37,7 +40,6 @@ class UserComment extends Component
         }
         $this->count = $this->cmts->count();
     }
-
     public function render()
     {
         return view('livewire.user-comment', [
