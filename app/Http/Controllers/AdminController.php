@@ -47,12 +47,13 @@ class AdminController extends Controller
         $guest_id = $id;
         $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
         $user_image = $user_profile_data->image ?? 'images_default.jpg';
-        
+
         return view('admin.guest-profile', compact('logged_user', 'guest_id', 'user_image'));
     }
-    public function loadAllPosts(){
+    public function loadAllPosts()
+    {
         $logged_user = Auth::user();
-        return view('admin.admin-post-component',compact('logged_user'));
+        return view('admin.admin-post-component', compact('logged_user'));
     }
     public function loadPostPage($post_id)
     {
@@ -64,10 +65,27 @@ class AdminController extends Controller
         $user_image = $user_profile_data->image ?? 'images_default.jpg';
         return view('admin.view-post', compact('logged_user', 'post_data', 'user_image'));
     }
-    public function loadUserComment($user_id) {
+    public function loadUserComment($user_id)
+    {
         $logged_user = Auth::user();
         $userId = $user_id;
-        return view('admin.user-comment',compact('logged_user', 'userId'));
-
+        return view('admin.user-comment', compact('logged_user', 'userId'));
+    }
+    public function loadGuestPosts($user_id)
+    {
+        $logged_user = Auth::user();
+        return view('admin.guest-posts', compact('logged_user', 'user_id'));
+    }
+    public function loadCreatePost()
+    {
+        $logged_user = Auth::user();
+        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+        $user_image = $user_profile_data->image ?? 'images_default.jpg';
+        return view('admin.create-post', compact('logged_user', 'user_image'));
+    }
+    public function loadCommentPage()
+    {
+        $logged_user = Auth::user();
+        return view('admin.comment-page', compact('logged_user'));
     }
 }
