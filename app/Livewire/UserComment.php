@@ -13,6 +13,7 @@ class UserComment extends Component
     public $cmts;
     public $name;
     public $count;
+    public $search = '';
 
     public function mount($userId)
     {
@@ -39,7 +40,6 @@ class UserComment extends Component
         }
         $this->count = $this->cmts->count();
     }
-
     public function render()
     {
         return view('livewire.user-comment', [
