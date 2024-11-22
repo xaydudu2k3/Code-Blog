@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Follower;
+use App\Notifications\UserFollowedNotification;
 use Livewire\Component;
 
 class FollowComponent extends Component
@@ -19,36 +20,29 @@ class FollowComponent extends Component
         ->first();
 
         $this->IFollowed = $checker == null ? 0 : 1;
-    }   
+    }
 
-    public function followUnfollow(){
-        // here we create a follow unfollow mechanism
-        // check if this logged user already followed the user from post
-        $checker = Follower::where([['follower_id',auth()->user()->id],['followed_id',$this->followed_id]])
-        ->first();
+    public function followUnfollow()
+    {
+        $checker = Follower::where([['follower_id', auth()->user()->id], ['followed_id', $this->followed_id]])->first();
 
         if ($checker == null) {
-            // create a data 
             $createFollow = new Follower;
             $createFollow->follower_id = auth()->user()->id;
             $createFollow->followed_id = $this->followed_id;
             $createFollow->save();
 
-            $this->number_followers = Follower::where('followed_id',$this->followed_id)->count();
-            $checker = Follower::where([['follower_id',auth()->user()->id],['followed_id',$this->followed_id]])
-            ->first();
+            // Gửi thông báo
+            $followedUser = $createFollow->followed;
+            $followedUser->notify(new UserFollowedNotification(auth()->user()));
         } else {
-            # unfollow by deleting the data..
-            $deleteFollow = Follower::where([['follower_id',auth()->user()->id],['followed_id',$this->followed_id]])
-            ->delete();
-            $this->number_followers = Follower::where('followed_id',$this->followed_id)->count();
-            $checker = Follower::where([['follower_id',auth()->user()->id],['followed_id',$this->followed_id]])
-            ->first();
-        }   
+            Follower::where([['follower_id', auth()->user()->id], ['followed_id', $this->followed_id]])->delete();
+        }
 
+        $this->number_followers = Follower::where('followed_id', $this->followed_id)->count();
         $this->IFollowed = $checker == null ? 0 : 1;
-         
     }
+
     public function render()
     {
         return view('livewire.follow-component',[]);

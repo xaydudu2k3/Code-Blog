@@ -93,10 +93,11 @@
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">4</span>
+                        <span
+                            class="badge bg-primary badge-number">{{ auth()->user()->unreadNotifications->count() }}</span>
                     </a><!-- End Notification Icon -->
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    {{-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                         <li class="dropdown-header">
                             You have 4 new notifications
                             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -160,7 +161,63 @@
                             <a href="#">Show all notifications</a>
                         </li>
 
-                    </ul><!-- End Notification Dropdown Items -->
+                    </ul><!-- End Notification Dropdown Items --> --}}
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            Bạn có {{ auth()->user()->unreadNotifications->count() }} thông báo mới
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Xem tất cả</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        @forelse(auth()->user()->unreadNotifications as $notification)
+                            @php
+                                $data = $notification->data;
+                            @endphp
+                            <li class="notification-item">
+                                @if (isset($notification->data['post_id']))
+                                    <i class="bi bi-heart text-danger"></i> {{-- Icon thích bài viết --}}
+                                    <div>
+                                        <a href="/view/profile/{{ $data['user_id'] }}" wire:navigate>
+                                            <strong>{{ $data['user_name'] }}</strong>
+                                        </a>
+                                        đã thích bài viết của bạn:
+                                        <a href="/view/post/{{ $data['post_id'] }}" wire:navigate
+                                            wire:click="addViewers({{ $data['post_id'] }})">
+                                            <strong>{{ $data['post_title'] }}</strong>
+                                        </a>
+                                        <p>{{ $notification->created_at->diffForHumans() }}</p>
+                                    </div>
+                                @elseif(isset($notification->data['message']))
+                                    <i class="bi bi-person-plus text-success"></i> {{-- Icon theo dõi --}}
+                                    <div>
+                                        <h4>Người theo dõi mới</h4>
+                                        <a href="/view/profile/{{ $data['user_id'] }}">
+                                            <strong>{{ $data['user_name'] }}</strong>
+                                        </a>
+                                        đã theo dõi bạn.
+                                        <p>{{ $notification->created_at->diffForHumans() }}</p>
+                                    </div>
+                                @endif
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                        @empty
+                            <li class="notification-item">
+                                <div>
+                                    <p>Bạn không có thông báo mới.</p>
+                                </div>
+                            </li>
+                        @endforelse
+
+                        <li class="dropdown-footer">
+                            <a href="{{ route('notifications.markAllAsRead') }}">Đánh dấu tất cả là đã đọc</a>
+                        </li>
+                    </ul>
+
+
 
                 </li><!-- End Notification Nav -->
 
@@ -299,7 +356,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="/user/home" >
+                <a class="nav-link" href="/user/home">
                     <i class="bi bi-grid"></i>
                     <span>Home page</span>
                 </a>
@@ -307,7 +364,7 @@
 
 
             <li class="nav-heading">Pages</li>
-            
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/my/posts" wire:navigate>
                     <i class="bi bi-archive-fill"></i>
@@ -315,13 +372,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/profile" >
+                <a class="nav-link collapsed" href="/profile">
                     <i class="bi bi-person"></i>
                     <span>Profile</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
-                <a class="nav-link " id="toggleTags" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link " id="toggleTags" data-bs-target="#tables-nav" data-bs-toggle="collapse"
+                    href="#">
                     <i class="bi bi-tag"></i><span>Tags</span>
                 </a>
                 <livewire:tag-sidebar />

@@ -14,7 +14,7 @@ class CreatePost extends Component
     // define the fields in order to perform model binding using livewire..
     public $post_title = '';
     public $content = '';
-    public $photo;
+    public $photo ;
     public $selectedTags = [];
 
     // function to save post
@@ -22,11 +22,13 @@ class CreatePost extends Component
         $this->validate([
             'post_title' => 'required',
             'content' => 'required',
-            'photo' => 'required',
             'selectedTags' => 'array', // Ensure tags are provided as an array
         ]);
-        $photo_name = md5($this->photo . microtime()).'.'.$this->photo->extension();
-        $this->photo->storeAs('images', $photo_name); //then we store image in this path
+        $photo_name ="default_image.jpg";
+        if($this->photo) {
+            $photo_name = md5($this->photo . microtime()) . '.' . $this->photo->extension();
+            $this->photo->storeAs('images', $photo_name); //then we store image in this path
+        }
         
         $createPost = new Post;
         $createPost->post_title = $this->post_title;

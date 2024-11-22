@@ -15,16 +15,11 @@ class ViewPostComponent extends Component
     public $tag_id;
     public function mount($tag_id)
     {
-
         //this will fetch all posts and order them desc by date created also join the 
         //user table to see each user with their posts..
         $this->tag_id = $tag_id;
     }
-    public function updateSorting()
-    {
-        // recall render()
-        return redirect(request()->header('Referer'));
-    }
+    
     public function addViewers($postId)
     {
         // here we add to post viewers table.. lets create a model and its migration..
@@ -56,6 +51,7 @@ class ViewPostComponent extends Component
     // }
     public function render()
     {
+        //dd($this->sortOption);
         $tag_name = Tag::find($this->tag_id)->name ?? "";
 
         $post_pag = Post::join('users', 'users.id', '=', 'posts.user_id')

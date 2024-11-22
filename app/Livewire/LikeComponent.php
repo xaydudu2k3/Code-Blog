@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Like;
+use App\Notifications\PostLikedNotification;
 use Livewire\Component;
 
 class LikeComponent extends Component
@@ -18,20 +19,22 @@ class LikeComponent extends Component
 
     }
 
-    public function likeUnlike(){
-        // here we will perform like & unlike functionality
+    public function likeUnlike()
+    {
         if ($this->isLiked == false) {
             $this->isLiked = true;
-            // here we create new  record in our likes table
+
             $likePost = new Like;
             $likePost->user_id = auth()->user()->id;
             $likePost->post_id = $this->post_id;
             $likePost->save();
-        }else{
-            // on unlike we need to delete the data..
+
+            // Gửi thông báo
+            $post = $likePost->post;
+            $post->user->notify(new PostLikedNotification(auth()->user(), $post));
+        } else {
             $this->isLiked = false;
-            Like::where([['user_id',auth()->user()->id],['post_id',$this->post_id]])
-            ->delete();
+            Like::where([['user_id', auth()->user()->id], ['post_id', $this->post_id]])->delete();
         }
     }
     public function render()

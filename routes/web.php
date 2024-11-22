@@ -51,3 +51,7 @@ Route::get('create/tag', [AdminController::class, 'loadCreateTag'])->middleware(
 Route::get('/edit/tag/{tag_id}', [AdminController::class, 'loadEditTag'])->middleware('admin');
 
 
+Route::get('/notifications/mark-all-as-read', function () {
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back()->with('status', 'Tất cả thông báo đã được đánh dấu là đã đọc.');
+})->name('notifications.markAllAsRead');
