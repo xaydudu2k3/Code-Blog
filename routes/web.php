@@ -36,6 +36,8 @@ Route::get('/edit/post/{post_id}', [UserController::class, 'loadEditPost'])->mid
 Route::get('/view/post/{id}', [UserController::class, 'loadPostPage'])->middleware('user');
 Route::get('/home/tag/{tag_id}', [UserController::class, 'loadHomePagewithTag'])->middleware('user');
 Route::get('/profile', [UserController::class, 'loadProfile'])->middleware('user')->name('profile.user');
+Route::get('/trending', [UserController::class, 'loadTrending']);
+Route::get('/trending/{tag_id}', [UserController::class, 'loadTrending']);
 Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile'])->middleware('user');
 
 Route::get('/admin/home', [AdminController::class, 'loadHomePage'])->middleware('admin');
