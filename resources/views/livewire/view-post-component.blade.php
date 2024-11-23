@@ -32,7 +32,7 @@
                         <livewire:like-component :postId="$post->id" :key="'like-' . $post->id" />
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer d-flex align-items-center justify-content-between">
                     {{-- here we use anchor tag to make both profile-image component and name be clickable --}}
                     <a href="/view/profile/{{ $post->user_id }}" wire:navigate>
                         <livewire:profile-image :userId="$post->user_id" :key="'profile-' . $post->user_id" />

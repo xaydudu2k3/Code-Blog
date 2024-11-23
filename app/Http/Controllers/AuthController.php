@@ -66,10 +66,10 @@ class AuthController extends Controller
         try {
             // login logic here
             $userCredentials = $request->only('email', 'password');
-            
+
             if (Auth::attempt($userCredentials)) {
                 // redirect user to home page based on role 
-                if (auth()->user()->role == 0) { 
+                if (auth()->user()->role == 0) {
                     return redirect('/user/home');
                 } elseif (auth()->user()->role == 1) {
                     return redirect('/admin/home');
@@ -88,7 +88,7 @@ class AuthController extends Controller
     {
         Session::flush();
         Auth::logout();
-        return redirect('/login/form');
+        return redirect('user/home');
     }
     // this for password resetting..
     public function forgotPassword()
@@ -135,7 +135,6 @@ class AuthController extends Controller
         } else {
             return redirect('/forgot/password')->with('error', 'email does not exist!');
         }
-
     }
 
     public function loadResetPassword(Request $request)
@@ -177,5 +176,4 @@ class AuthController extends Controller
     {
         return view('404');
     }
-
 }

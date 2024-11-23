@@ -11,7 +11,7 @@
                                 {{-- here we will pass on which day the post was published --}}
                                 <i class="bi bi-calendar"></i>
                                 <span class="text-muted">{{date('d-m-Y h:i',strtotime($post_data->created_at))}}</span> <br>
-                                <a href="/view/profile/{{$post_data->user_id}}" wire:navigate>
+                                <a href="/admin/view/profile/{{$post_data->user_id}}" wire:navigate>
                                     <livewire:profile-image :userId="$post_data->user_id" />
                                     <span class="text-muted mx-3 text-capitalize my-1"> {{$post_data->name}}</span>
                                 </a>
