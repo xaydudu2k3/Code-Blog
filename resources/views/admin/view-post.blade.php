@@ -28,15 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-body pb-0">
-              <h5 class="card-title">More posts from {{$post_data->name}}</h5>
-
-              <livewire:related-post :userId="$post_data->user_id"/>
-            </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 @endsection
