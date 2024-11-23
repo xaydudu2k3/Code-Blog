@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="social-buttons mt-4">
-                <a href="#" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
+                <a href="/admin/view/like/{{$id}}" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
                 @if ($role) 
                 <a href="/admin/view/guestpost/{{ $id }}" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
                 @else
