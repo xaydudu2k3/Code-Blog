@@ -91,7 +91,7 @@
              </div>
              @if ($admin)
              <div class="social-buttons mt-4">
-                 <a href="#" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
+                 <a href="/admin/view/like/{{ $guestId }}" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
                  <a href="/admin/view/guestpost/{{ $guestId }}" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
                  <a href="#" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
                  <a href="/admin/view/comment/{{ $guestId }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>

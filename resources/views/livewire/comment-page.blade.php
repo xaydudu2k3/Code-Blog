@@ -4,7 +4,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header align-items-center justify-content-between">
-            <h1 class="card-title">Danh sách comment</h1>
+            <h1 class="card-title">List Comments</h1>
             <div class="d-flex align-items-center justify-content-between">
                 <div class="search-bar">
                     <form class="search-form d-flex align-items-center" wire:submit.prevent="searchComment">
