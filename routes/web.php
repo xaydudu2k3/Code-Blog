@@ -57,6 +57,7 @@ Route::get('/admin/view/guestpost/{user_id}', [AdminController::class, 'loadGues
 Route::get('/admin/create/post', [AdminController::class, 'loadCreatePost'])->middleware('admin');
 
 Route::get('/admin/comment', [AdminController::class, 'loadCommentPage'])->middleware('admin');
+Route::get('/admin/view/following/{user_id}', [AdminController::class, 'loadUserFollowing'])->middleware('admin');
 
 
 
