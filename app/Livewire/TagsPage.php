@@ -18,7 +18,7 @@ class TagsPage extends Component
   {
     Tag::where('id', $id)->delete();
     session()->flash('message', 'The tag was successfully deleted!');
-    return $this->redirect('/admin/tag', navigate: true);
+    $this->searchTag();
   }
 
   public function render()

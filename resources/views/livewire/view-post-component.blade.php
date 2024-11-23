@@ -1,8 +1,13 @@
     <div class="row g-3">
         <div class="col-6">{{ $tag_name }}</div>
         <div class="col-6 mb-3">
-            <!-- Dropdown for sorting posts -->
 
+            {{-- <!-- Dropdown for sorting posts -->
+            <select class="form-select" wire:model.change="sortOption">
+                <option value="latest">Latest</option>
+                <option value="oldest">Oldest</option>
+                <option value="most_viewed">Most Viewed</option>
+            </select> --}}
         </div>
         {{-- here we will loop through all posts.. --}}
 

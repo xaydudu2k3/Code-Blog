@@ -25,7 +25,7 @@
                         <th class="text-center">Tag name</th>
                         <th class="text-center">Created at</th>
                         <th class="text-center">Updated at</th>
-                        <th class="text-center" style="width:110px">Function</th>
+                        <th class="text-center" style="width:110px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
