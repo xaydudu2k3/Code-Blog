@@ -4,11 +4,11 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header align-items-center justify-content-between">
-            <h1 class="card-title">Danh sách tag</h1>
+            <h1 class="card-title">List Tags</h1>
             <div class="d-flex align-items-center justify-content-between">
                 <div class="search-bar">
                     <form class="search-form d-flex align-items-center" wire:submit.prevent="searchTag">
-                        <input type="text" name="search" wire:model="search" placeholder="Search" title="Enter search keyword">
+                        <input type="text" name="search" wire:model="search" placeholder="Search tag name" title="Enter search keyword">
                         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
@@ -29,20 +29,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($tags as $tag)
+                    @foreach($tags as $idx => $tag)
                     <tr class="text-center">
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $tags->firstItem() + $idx }}</td>
                         <td>{{ $tag->name }}</td>
-                        <td>{{ $tag->created_at }}</td>
-                        @if ($tag->updated_at != null)
-                        <td>{{ $tag->updated_at }}</td>
-                        @else
-                        <td>{{ $tag->created_at }}</td>
-                        @endif
+                        <td>{{ $tag->created_at->format('d/m/Y') }}</td>
+                        <td>{{ $tag->updated_at->format('d/m/Y') }}</td>
                         <td>
                             <div class="d-flex justify-content-center">
                                 <a href="/edit/tag/{{$tag->id}}" wire:navigate class="btn btn-primary btn-sm mx-1">Edit</a>
-                                <button class="btn btn-danger btn-sm mx-1" wire:click="deleteTag({{ $tag->id }})">Delete</button>
+                                <button class="btn btn-danger btn-sm mx-1" wire:confirm="Are you sure you want to delete this?" wire:click="deleteTag({{ $tag->id }})">Delete</button>
                             </div>
                         </td>
                     </tr>
@@ -51,6 +47,9 @@
             </table>
         </div>
         <!-- /.card-body -->
+        <div class="d-flex justify-content-center">
+            {{ $tags->links() }}
+        </div>
     </div>
     <!-- /.card -->
 

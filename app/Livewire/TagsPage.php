@@ -7,11 +7,11 @@ use Livewire\Component;
 
 class TagsPage extends Component
 {
-  public $tags_data;
   public $search = '';
-  public function mount()
+
+  public function searchTag()
   {
-    $this->tags_data = Tag::all();;
+    $this->render();
   }
 
   public function deleteTag($id)
@@ -20,16 +20,15 @@ class TagsPage extends Component
     session()->flash('message', 'The tag was successfully deleted!');
     return $this->redirect('/admin/tag', navigate: true);
   }
-  public function searchTag()
-  {
-    // Tìm kiếm các tag theo giá trị search
-    $this->tags_data = Tag::where('name', 'like', '%' . $this->search . '%')->get();
-  }
 
   public function render()
   {
+    $tags = Tag::where('name', 'like', '%' . $this->search . '%')
+      ->orderBy('created_at', 'desc')
+      ->paginate(2);
+
     return view('livewire.tags-page', [
-      'tags' => $this->tags_data
+      'tags' => $tags
     ]);
   }
 }
