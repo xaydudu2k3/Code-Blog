@@ -93,4 +93,10 @@ class AdminController extends Controller
         $logged_user = Auth::user();
         return view('admin.comment-page', compact('logged_user'));
     }
+    public function loadUserFollowing($user_id)
+    {
+        $logged_user = Auth::user();
+        $userId = $user_id;
+        return view('admin.user-following', compact('logged_user', 'userId'));
+    }
 }

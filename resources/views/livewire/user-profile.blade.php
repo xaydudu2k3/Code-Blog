@@ -96,7 +96,7 @@
                 @else
                 <a href="/my/posts" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
                 @endif
-                <a href="#" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
+                <a href="/admin/view/following/{{ $id }}" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
                 <a href="{{ $role ? '/admin/view/comment' : '/my/comments' }}/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
                
             </div>
