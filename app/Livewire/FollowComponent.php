@@ -11,15 +11,19 @@ class FollowComponent extends Component
     public $followed_id;
     public $IFollowed; //this will be boolean
     public $number_followers;
-    public function mount($followedId){
+    public function mount($followedId)
+    {
         $this->followed_id = $followedId;
-        $this->number_followers = Follower::where('followed_id',$this->followed_id)->count();
+        $this->number_followers = Follower::where('followed_id', $this->followed_id)->count();
 
-        // 
-         $checker = Follower::where([['follower_id',auth()->user()->id],['followed_id',$this->followed_id]])
-        ->first();
+        if (auth()->check()) {
+            $checker = Follower::where([
+                ['follower_id', auth()->user()->id],
+                ['followed_id', $this->followed_id]
+            ])->first();
 
-        $this->IFollowed = $checker == null ? 0 : 1;
+            $this->IFollowed = $checker == null ? 0 : 1;
+        }
     }
 
     public function followUnfollow()
@@ -45,6 +49,6 @@ class FollowComponent extends Component
 
     public function render()
     {
-        return view('livewire.follow-component',[]);
+        return view('livewire.follow-component', []);
     }
 }

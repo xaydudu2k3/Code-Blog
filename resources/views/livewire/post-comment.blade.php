@@ -1,5 +1,6 @@
 <div>
     <!-- Form để gửi bình luận -->
+    @if(auth()->check())
     <form wire:submit.prevent="leaveComment">
         <div class="mb-3">
             <textarea class="form-control" wire:model.defer="comment" placeholder="Viết bình luận..."></textarea>
@@ -7,6 +8,12 @@
         </div>
         <button class="btn btn-primary" type="submit">Publish</button>
     </form>
+    @else
+    <div class="mb-3">
+        <textarea class="form-control" placeholder="Vui lòng đăng nhập để bình luận..." disabled></textarea>
+    </div>
+    <button class="btn btn-primary" disabled>Publish</button>
+    @endif
 
     <!-- Hiển thị danh sách bình luận -->
     @foreach($postComments as $comment)
@@ -27,7 +34,7 @@
                         @endif
                     </small>
                 </div>
-                @if($comment->user_id === auth()->id())
+                @if(auth()->check() && $comment->user_id === auth()->id())
                 <div class="dropdown">
                     <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
                         <i class="bi bi-three-dots"></i>
@@ -39,7 +46,7 @@
                 </div>
                 @endif
             </div>
-            @if($editingCommentId === $comment->id)
+            @if(auth()->check() && $editingCommentId === $comment->id)
             <div>
                 <textarea class="form-control" wire:model.defer="editingCommentContent"></textarea>
                 <div class="mt-2">

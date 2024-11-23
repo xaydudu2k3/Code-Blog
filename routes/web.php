@@ -4,11 +4,10 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use App\Livewire\MyPosts;
 
-Route::get('/', function () {
-    return view('login-page');
-});
+Route::get('/', [UserController::class, 'loadHomePage']);
 
 Route::get('/registration/form', [AuthController::class, 'loadRegisterForm']);
 Route::post('/register/user', [AuthController::class, 'registerUser'])->name('registerUser');
@@ -29,16 +28,16 @@ Route::post('/reset/user/password', [AuthController::class, 'ResetPassword'])->n
 
 Route::get('/404', [AuthController::class, 'load404']);
 // create controllers for each user
-Route::get('user/home', [UserController::class, 'loadHomePage'])->middleware('user');
+Route::get('user/home', [UserController::class, 'loadHomePage']);
 Route::get('my/posts', [UserController::class, 'loadMyPosts'])->middleware('user');
 Route::get('create/post', [UserController::class, 'loadCreatePost'])->middleware('user');
 Route::get('/edit/post/{post_id}', [UserController::class, 'loadEditPost'])->middleware('user');
 Route::get('/view/post/{id}', [UserController::class, 'loadPostPage']);
-Route::get('/home/tag/{tag_id}', [UserController::class, 'loadHomePagewithTag'])->middleware('user');
+Route::get('/home/tag/{tag_id}', [UserController::class, 'loadHomePagewithTag']);
 Route::get('/profile', [UserController::class, 'loadProfile'])->middleware('user')->name('profile.user');
 Route::get('/trending', [UserController::class, 'loadTrending']);
 Route::get('/trending/{tag_id}', [UserController::class, 'loadTrending']);
-Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile'])->middleware('user');
+Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile']);
 Route::get('my/comments/{id}', [UserController::class, 'loadMyComments'])->middleware('user');
 
 Route::get('/admin/home', [AdminController::class, 'loadHomePage'])->middleware('admin');
@@ -61,6 +60,6 @@ Route::get('/admin/comment', [AdminController::class, 'loadCommentPage'])->middl
 
 
 Route::get('/notifications/mark-all-as-read', function () {
-    auth()->user()->unreadNotifications->markAsRead();
+    Auth::user()->unreadNotifications->markAsRead();
     return redirect()->back()->with('status', 'Tất cả thông báo đã được đánh dấu là đã đọc.');
 })->name('notifications.markAllAsRead');
