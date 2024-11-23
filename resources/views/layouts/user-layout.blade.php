@@ -88,6 +88,7 @@
                     </a>
                 </li><!-- End Search Icon-->
 
+                @auth
                 <a href="/create/post" class="btn btn-outline-danger mx-2">create</a>
                 <li class="nav-item dropdown">
 
@@ -172,44 +173,44 @@
                         </li>
 
                         @forelse(auth()->user()->unreadNotifications as $notification)
-                            @php
-                                $data = $notification->data;
-                            @endphp
-                            <li class="notification-item">
-                                @if (isset($notification->data['post_id']))
-                                    <i class="bi bi-heart text-danger"></i> {{-- Icon thích bài viết --}}
-                                    <div>
-                                        <a href="/view/profile/{{ $data['user_id'] }}" wire:navigate>
-                                            <strong>{{ $data['user_name'] }}</strong>
-                                        </a>
-                                        đã thích bài viết của bạn:
-                                        <a href="/view/post/{{ $data['post_id'] }}" wire:navigate
-                                            wire:click="addViewers({{ $data['post_id'] }})">
-                                            <strong>{{ $data['post_title'] }}</strong>
-                                        </a>
-                                        <p>{{ $notification->created_at->diffForHumans() }}</p>
-                                    </div>
-                                @elseif(isset($notification->data['message']))
-                                    <i class="bi bi-person-plus text-success"></i> {{-- Icon theo dõi --}}
-                                    <div>
-                                        <h4>Người theo dõi mới</h4>
-                                        <a href="/view/profile/{{ $data['user_id'] }}">
-                                            <strong>{{ $data['user_name'] }}</strong>
-                                        </a>
-                                        đã theo dõi bạn.
-                                        <p>{{ $notification->created_at->diffForHumans() }}</p>
-                                    </div>
-                                @endif
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                        @php
+                        $data = $notification->data;
+                        @endphp
+                        <li class="notification-item">
+                            @if (isset($notification->data['post_id']))
+                            <i class="bi bi-heart text-danger"></i> {{-- Icon thích bài viết --}}
+                            <div>
+                                <a href="/view/profile/{{ $data['user_id'] }}" wire:navigate>
+                                    <strong>{{ $data['user_name'] }}</strong>
+                                </a>
+                                đã thích bài viết của bạn:
+                                <a href="/view/post/{{ $data['post_id'] }}" wire:navigate
+                                    wire:click="addViewers({{ $data['post_id'] }})">
+                                    <strong>{{ $data['post_title'] }}</strong>
+                                </a>
+                                <p>{{ $notification->created_at->diffForHumans() }}</p>
+                            </div>
+                            @elseif(isset($notification->data['message']))
+                            <i class="bi bi-person-plus text-success"></i> {{-- Icon theo dõi --}}
+                            <div>
+                                <h4>Người theo dõi mới</h4>
+                                <a href="/view/profile/{{ $data['user_id'] }}">
+                                    <strong>{{ $data['user_name'] }}</strong>
+                                </a>
+                                đã theo dõi bạn.
+                                <p>{{ $notification->created_at->diffForHumans() }}</p>
+                            </div>
+                            @endif
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         @empty
-                            <li class="notification-item">
-                                <div>
-                                    <p>Bạn không có thông báo mới.</p>
-                                </div>
-                            </li>
+                        <li class="notification-item">
+                            <div>
+                                <p>Bạn không có thông báo mới.</p>
+                            </div>
+                        </li>
                         @endforelse
 
                         <li class="dropdown-footer">
@@ -286,7 +287,6 @@
                     </ul><!-- End Messages Dropdown Items -->
 
                 </li><!-- End Messages Nav -->
-
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
@@ -305,32 +305,6 @@
                             <hr class="dropdown-divider">
                         </li>
 
-                        {{-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li> --}}
-
-                        {{-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li> --}}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -344,7 +318,19 @@
 
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
-
+                @else
+                <div class="d-flex justify-content-between align-items-center">
+                    <a class="dropdown-item d-flex align-items-center px-2" href="/login/form">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
+                        <span>Login</span>
+                    </a>
+                    /
+                    <a class="dropdown-item d-flex align-items-center px-2" href="/registration/form">
+                        <i class="bi bi-person-plus me-2"></i>
+                        <span>Register</span>
+                    </a>
+                </div>
+                @endauth
             </ul>
         </nav><!-- End Icons Navigation -->
 
@@ -353,7 +339,7 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
         <style>
-            .active-nav{
+            .active-nav {
                 background-color: #bfc0c6;
                 color: #4154f1;
             }
@@ -370,6 +356,7 @@
 
             <li class="nav-heading">Pages</li>
 
+            @auth
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/my/posts" wire:navigate>
                     <i class="bi bi-archive-fill"></i>
@@ -382,6 +369,7 @@
                     <span>Profile</span>
                 </a>
             </li><!-- End Profile Page Nav -->
+            @endauth
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/trending">
                     <i class="bi bi-fire"></i>

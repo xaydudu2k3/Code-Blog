@@ -11,12 +11,14 @@ class LikeComponent extends Component
     public $post_id;
     public $isLiked;
 
-    public function mount($postId){
+    public function mount($postId)
+    {
         $this->post_id = $postId;
-        // check if likes table then assign isLiked corresponding value..
-        $checker = Like::where([['user_id',auth()->user()->id],['post_id',$this->post_id]])->first();
-        $this->isLiked = $checker == null ? false : true;
-
+        if (auth()->check()) {
+            // check if likes table then assign isLiked corresponding value..
+            $checker = Like::where([['user_id', auth()->user()->id], ['post_id', $this->post_id]])->first();
+            $this->isLiked = $checker == null ? false : true;
+        }
     }
 
     public function likeUnlike()
@@ -39,8 +41,8 @@ class LikeComponent extends Component
     }
     public function render()
     {
-        return view('livewire.like-component',[
-            'likesCount' => Like::where('post_id',$this->post_id)->count()
+        return view('livewire.like-component', [
+            'likesCount' => Like::where('post_id', $this->post_id)->count()
         ]);
     }
 }
