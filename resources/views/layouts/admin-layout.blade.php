@@ -63,13 +63,15 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <!-- <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+    <div class="search-bar">
+      {{-- <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form> --}}
+      <form action="" class="d-flex" role="search">
+        <livewire:global-search />
       </form>
-    </div> -->
-    <!-- End Search Bar -->
+    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -319,8 +321,8 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="/admin/comment" wire:navigate>
-            <i class="bi bi-person"></i>
-            <span>Comment</span>
+          <i class="bi bi-person"></i>
+          <span>Comment</span>
         </a>
       </li>
 
