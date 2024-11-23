@@ -13,11 +13,32 @@
 
         <h3 class="mb-4">Comments by {{ $name }}: {{ $count }}</h3>
         <div class="search-bar">
-                    <form class="search-form d-flex align-items-center" wire:submit.prevent="searchComment">
-                        <input type="text" name="search" wire:model="search" placeholder="Search" title="Enter search keyword">
-                        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                    </form>
+            <form class="search-form d-flex align-items-center" wire:submit.prevent="searchComment">
+                <div class="position-relative">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        wire:model="search" 
+                        placeholder="Search" 
+                        title="Enter search keyword" 
+                        class="form-control"
+                    >
+                    @if ($search)
+                        <button 
+                            type="button" 
+                            class="btn btn-clear position-absolute end-0 top-0" 
+                            style="border: none; background: transparent; padding: 0.5rem;" 
+                            wire:click="clearSearch">
+                            ✖
+                        </button>
+                    @endif
+                </div>
+                <button type="submit" title="Search" class="btn btn-primary ms-2">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
         </div>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -38,10 +59,10 @@
                             Delete
                         </button>
                         @if ($comment->post)
-                        <a href="/admin/view/post/{{ $comment->post->id }}"
+                        <a href="{{ $role ? '/admin/view/post' : '/view/post' }}/{{ $comment->post->id }}"
                             class="btn btn-primary btn-sm">
                             View Post
-                        </a>
+                         </a>
                         @endif
                     </td>
                 </tr>

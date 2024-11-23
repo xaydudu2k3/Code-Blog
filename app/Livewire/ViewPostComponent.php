@@ -11,7 +11,7 @@ class ViewPostComponent extends Component
 {
 
     public $posts;
-    public $sortOption = 'latest';
+    //public $sortOption = 'latest';
     public $tag_id;
     public function mount($tag_id)
     {
@@ -53,7 +53,7 @@ class ViewPostComponent extends Component
     {
         //dd($this->sortOption);
         $tag_name = Tag::find($this->tag_id)->name ?? "";
-
+        
         $post_pag = Post::join('users', 'users.id', '=', 'posts.user_id')
             ->select('users.name', 'users.id as followedId', 'posts.*')->where('posts.active', 1);
 
@@ -63,13 +63,7 @@ class ViewPostComponent extends Component
             });
         }
 
-        if ($this->sortOption === 'latest') {
-            $post_pag = $post_pag->orderBy('posts.created_at', 'desc');
-        } elseif ($this->sortOption === 'oldest') {
-            $post_pag = $post_pag->orderBy('posts.created_at', 'asc');
-        } elseif ($this->sortOption === 'most_viewed') {
-            $post_pag = $post_pag->withCount('views')->orderBy('views_count', 'desc');
-        }
+        
 
         $post_pag = $post_pag->paginate(6);
 

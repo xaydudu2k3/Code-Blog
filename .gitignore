@@ -1,0 +1,7 @@
+# Bỏ qua tất cả các tệp hình ảnh trong thư mục public/storage/images
+public/storage/images/*.jpg
+public/storage/images/*.png
+
+# Bỏ qua tất cả các tệp trong thư mục public/storage/livewire-tmp
+public/storage/livewire-tmp/*.jpg
+public/storage/livewire-tmp/*.png

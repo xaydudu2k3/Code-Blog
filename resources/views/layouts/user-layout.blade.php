@@ -352,7 +352,12 @@
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
-
+        <style>
+            .active-nav{
+                background-color: #bfc0c6;
+                color: #4154f1;
+            }
+        </style>
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
@@ -378,6 +383,12 @@
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="/trending">
+                    <i class="bi bi-fire"></i>
+                    <span>Trending</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+            <li class="nav-item">
                 <a class="nav-link " id="toggleTags" data-bs-target="#tables-nav" data-bs-toggle="collapse"
                     href="#">
                     <i class="bi bi-tag"></i><span>Tags</span>
@@ -397,7 +408,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Code Blog</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
