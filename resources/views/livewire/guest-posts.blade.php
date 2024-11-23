@@ -42,7 +42,7 @@
                         <th class="text-center">Title</th>
                         <th class="text-center">Image</th>
                         <th class="text-center">Content</th>
-                        <th class="text-center"">Active</th>
+                        <th class="text-center">Active</th>
                         <th class=" text-center" style="width:110px">Function</th>
                     </tr>
                 </thead>
