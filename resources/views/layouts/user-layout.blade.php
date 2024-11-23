@@ -352,7 +352,12 @@
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
-
+        <style>
+            .active-nav{
+                background-color: #bfc0c6;
+                color: #4154f1;
+            }
+        </style>
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
@@ -375,6 +380,12 @@
                 <a class="nav-link collapsed" href="/profile">
                     <i class="bi bi-person"></i>
                     <span>Profile</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/trending">
+                    <i class="bi bi-fire"></i>
+                    <span>Trending</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">

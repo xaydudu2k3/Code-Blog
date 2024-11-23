@@ -14,7 +14,7 @@ class UserController extends Controller
         $logged_user = Auth::user();
         $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
         $user_image = $user_profile_data->image ?? 'images_default.jpg';
-        $tag_id = null;
+        $tag_id = null; 
         return view('user.home-page', compact('logged_user', 'user_image', 'tag_id'));
     }
     public function loadHomePagewithTag($tag_id)
@@ -68,6 +68,14 @@ class UserController extends Controller
         $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
         $user_image = $user_profile_data->image ?? 'images_default.jpg';
         return view('user.user-profile', compact('logged_user', 'user_image'));
+    }
+    public function loadTrending()
+    {
+        $logged_user = Auth::user();
+        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+        $user_image = $user_profile_data->image ?? 'images_default.jpg';
+        $tag_id = null;
+        return view('user.user-trending', compact('logged_user', 'user_image', 'tag_id'));
     }
 
     public function loadGuestProfile($id)
