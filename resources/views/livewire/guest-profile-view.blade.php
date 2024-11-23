@@ -97,6 +97,7 @@
                  <a href="/admin/view/comment/{{ $guestId }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
              </div>
              @endif
+             <livewire:follow-component :followedId="$guestId" />
          </div>
 
      </div>
