@@ -17,7 +17,9 @@ class GuestPosts extends Component
     {
         $this->user_id = $user_id;
         $this->name = User::find($user_id)->name;
-        $this->role = auth()->user()->role;
+        if (auth()->check()) {
+            $this->role = auth()->user()->role;
+        }
     }
     public function searchTag()
     {
@@ -49,7 +51,7 @@ class GuestPosts extends Component
     public function clearSearch()
     {
         $this->search = '';
-        $this->searchTag(); 
+        $this->searchTag();
     }
     public function render()
     {
@@ -58,7 +60,7 @@ class GuestPosts extends Component
             ->where('posts.post_title', 'like', '%' . $this->search . '%')
             ->orderBy('posts.created_at', 'desc')
             ->paginate(6, ['posts.*']);
-            $this->count = $posts->count();
+        $this->count = $posts->count();
         return view('livewire.guest-posts', [
             'posts' => $posts,
             'name' => $this->name,
