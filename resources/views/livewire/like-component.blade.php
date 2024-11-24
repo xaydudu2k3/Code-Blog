@@ -1,6 +1,5 @@
 <div class="col-xl-6">
     <livewire:post-viewers-count :postId="$post_id" />
-
     @if (!auth()->check())
     <i class="bi bi-hand-thumbs-up float-end"
         style="cursor: pointer;"

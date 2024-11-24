@@ -33,8 +33,8 @@
                     <tr class="text-center">
                         <td>{{ $tags->firstItem() + $idx }}</td>
                         <td>{{ $tag->name }}</td>
-                        <td>{{ $tag->created_at->format('d/m/Y') }}</td>
-                        <td>{{ $tag->updated_at->format('d/m/Y') }}</td>
+                        <td>{{ ($tag->created_at) ? $tag->created_at->format('d/m/Y') : ""}}</td>
+                        <td>{{( $tag->updated_at) ? $tag->updated_at->format('d/m/Y') : ""}}</td>
                         <td>
                             <div class="d-flex justify-content-center">
                                 <a href="/edit/tag/{{$tag->id}}" wire:navigate class="btn btn-primary btn-sm mx-1">Edit</a>

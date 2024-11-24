@@ -1,3 +1,4 @@
+
 <div>
     @if (!auth()->check())
     <button class="btn btn-outline-primary btn-sm m-2"
