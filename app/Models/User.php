@@ -64,4 +64,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(PostViewers::class);
     }
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
 }

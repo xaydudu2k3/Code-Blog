@@ -45,7 +45,7 @@
                 @foreach ($followingUsers as $user)
                     <tr>
                         <td>
-                            <img src="{{ asset('storage/images/' . ($user->image ?? 'default_user.jpg')) }}"
+                            <img src="{{ asset('storage/images/' . ($user->profile->image ?? 'default_user.jpg')) }}"
                                 alt="Profile Photo" class="rounded-circle" height="40px" width="40px">
                         </td>
                         <td>{{ $user->name }}</td>

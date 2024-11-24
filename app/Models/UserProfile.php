@@ -21,4 +21,8 @@ class UserProfile extends Model
         'LinkedIn',
         'Instagram',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

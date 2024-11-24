@@ -6,10 +6,10 @@ use App\Models\Comment;
 use App\Models\Follower;
 use App\Models\Post;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class MyPosts extends Component
 {
-  public $my_posts;
   public $my_posts_count;
   public $my_comments_count;
   public $my_followers_count; 
@@ -29,8 +29,10 @@ class MyPosts extends Component
   }
   public function render()
   {
+    $user_id = auth()->user()->id;
+    $posts = Post::where('user_id', $user_id)->paginate(8);
     return view('livewire.my-posts', [
-      'posts' => $this->my_posts,
+      'posts' => $posts,
       'post_count' => $this->my_posts_count,
       'comment_count' => $this->my_comments_count,
       'follower_count' => $this->my_followers_count

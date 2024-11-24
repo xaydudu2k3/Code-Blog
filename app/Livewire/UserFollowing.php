@@ -58,6 +58,7 @@ class UserFollowing extends Component
         // $this->count = $this->followingUsers->count();
         $this->followingUsers = Follower::where('follower_id', $this->userId)
             ->with([
+                'followed.profile',
                 'followed' => function ($query) {
                     $query->when($this->search, function ($query) {
                         $query->where('name', 'like', '%' . $this->search . '%');
@@ -69,7 +70,6 @@ class UserFollowing extends Component
                 $follower->followed->followed_at = $follower->created_at;
                 return $follower->followed; 
             });
-
         // Đếm số lượng người dùng
         $this->count = $this->followingUsers->count();
     }

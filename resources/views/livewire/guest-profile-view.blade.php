@@ -108,8 +108,6 @@
 
              @endif
 
-             <livewire:follow-component :followedId="$guestId" />
-
          </div>
 
      </div>
