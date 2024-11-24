@@ -90,14 +90,18 @@
                 </div>
             </div>
             <div class="social-buttons mt-4">
-                <a href="/admin/view/like/{{$id}}" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
                 @if ($role) 
+                <a href="/admin/view/like/{{$id}}" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
                 <a href="/admin/view/guestpost/{{ $id }}" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
+                <a href="/admin/view/following/{{ $id }}"  class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
+                <a href="/admin/view/comment/{{ $id }}" class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
+                
                 @else
+                <a href="/my/like/{{$id}}" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
                 <a href="/my/posts" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
+                <a href="/my/following/{{ $id }}" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
+                <a href="/my/comments/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
                 @endif
-                <a href="/admin/view/following/{{ $id }}" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
-                <a href="{{ $role ? '/admin/view/comment' : '/my/comments' }}/{{ $id }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
                
             </div>
         </div>

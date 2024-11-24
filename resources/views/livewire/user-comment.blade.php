@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-12">
+<div class="card">
+    <div class="card-header align-items-center justify-content-between">
         @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session('message') }}
@@ -38,32 +38,35 @@
                 </button>
             </form>
         </div>
-
-        <table class="table table-striped">
+    </div>
+        <div class="card-body">
+        <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Post Title</th>
-                    <th>Content</th>
-                    <th>Comment Date</th>
-                    <th>Actions</th>
+                    <th class="text-center">Post Title</th>
+                    <th class="text-center">Content</th>
+                    <th class="text-center">Comment Date</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($comments as $comment)
-                <tr>
+                <tr class="text-center">
                     <td>{{ $comment->post->post_title ?? 'Post Deleted' }}</td>
                     <td>{{ $comment->comment ?? 'Post Deleted' }}</td>
                     <td>{{ $comment->created_at->format('d-m-Y H:i') }}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" wire:click="deleteComment({{ $comment->id }})">
-                            Delete
-                        </button>
-                        @if ($comment->post)
-                        <a href="{{ $role ? '/admin/view/post' : '/view/post' }}/{{ $comment->post->id }}"
-                            class="btn btn-primary btn-sm">
-                            View Post
-                         </a>
-                        @endif
+                        <div class="d-flex justify-content-center">
+                            @if ($comment->post)
+                            <a href="{{ $role ? '/admin/view/post' : '/view/post' }}/{{ $comment->post->id }}"
+                                class="btn btn-primary btn-sm mx-1">
+                                View Post
+                            </a>
+                            @endif
+                            <button class="btn btn-danger btn-sm" wire:click="deleteComment({{ $comment->id }})">
+                                Delete
+                            </button>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -75,4 +78,6 @@
         @endif
         <button onclick="history.back()" class="btn btn-secondary ms-3">Back</button>
     </div>
+
 </div>
+

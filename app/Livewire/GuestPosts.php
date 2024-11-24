@@ -12,10 +12,12 @@ class GuestPosts extends Component
     public $name;
     public $search = '';
     public $count;
+    public $role;
     public function mount($user_id)
     {
         $this->user_id = $user_id;
         $this->name = User::find($user_id)->name;
+        $this->role = auth()->user()->role;
     }
     public function searchTag()
     {

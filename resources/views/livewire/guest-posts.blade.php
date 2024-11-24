@@ -42,7 +42,9 @@
                         <th class="text-center">Title</th>
                         <th class="text-center">Image</th>
                         <th class="text-center">Content</th>
+                        @if ($role)
                         <th class="text-center">Active</th>
+                        @endif
                         <th class=" text-center" style="width:110px">Function</th>
                     </tr>
                 </thead>
@@ -55,6 +57,7 @@
                             <img height="40px" width="40px" src="{{ asset('storage/images/' .$post->photo.'') }}" alt="post image">
                         </td>
                         <td>{{ $post->content }}</td>
+                        @if ($role)
                         <td>
                             <input
                                 class="form-check-input"
@@ -64,10 +67,15 @@
                                 {{ $post->active ? 'checked' : '' }}>
                             <label class="form-check-label" for="Publish{{ $post->id }}"></label>
                         </td>
+                        @endif
                         <td>
                             <div class="d-flex justify-content-center">
+                                @if ($role)
                                 <a href="/admin/view/post/{{ $post->id }}" wire:navigate class="btn btn-primary btn-sm mx-1">View</a>
                                 <button wire:click="deletePost({{$post->id}})" wire:confirm="Are you sure you want to delete this?" class="btn btn-danger btn-sm">Delete</button>
+                                @else
+                                <a href="view/post/{{ $post->id }}" wire:navigate class="btn btn-primary btn-sm mx-1">View</a>
+                                @endif
                             </div>
                         </td>
                     </tr>
