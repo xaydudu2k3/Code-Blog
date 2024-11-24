@@ -94,4 +94,8 @@
             </div>
         @endforeach
     </div>
+    <!-- End Table with stripped rows -->
+    <div class="d-flex justify-content-center mt-3">
+        {{ $posts->links() }}
+    </div>
 </div>

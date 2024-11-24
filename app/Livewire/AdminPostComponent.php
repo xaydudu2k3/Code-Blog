@@ -5,17 +5,16 @@ namespace App\Livewire;
 use App\Models\Post;
 use App\Models\Comment;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AdminPostComponent extends Component
 {
-    public $posts;
-    public $count;
+
     public $search = '';
 
     public function mount()
     {
-        $this->posts = Post::all();
-        $this->count = $this->posts->count();
+        
     }
     public function deletePost($postId)
     {
@@ -43,9 +42,9 @@ class AdminPostComponent extends Component
     }
     public function searchComment()
     {
-        $this->posts = Post::where('content', 'like', '%' . $this->search . '%')
+        $posts = Post::where('content', 'like', '%' . $this->search . '%')
             ->get();
-        $this->count = $this->posts->count();
+        $count = $posts->count();
     }
 
     public function clearSearch()
@@ -55,9 +54,11 @@ class AdminPostComponent extends Component
     }
     public function render()
     {
+        $posts = Post::paginate(6);
+        $count = $posts->count();
         return view('livewire.admin-post-component', [
-            'posts' => $this->posts,
-            'count' => "$this->count"
+            'posts' => $posts,
+            'count' => $count
         ]);
     }
 }
