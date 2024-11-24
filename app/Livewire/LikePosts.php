@@ -11,11 +11,14 @@ class LikePosts extends Component
     public $user_id;
     public $name;
     public $search = '';
+    public $count;
+    public $role;
 
     public function mount($userId)
     {
         $this->user_id = $userId;
         $this->name = User::find($userId)->name;
+        $this->role = auth()->user()->role;
     }
     public function searchTag()
     {
@@ -44,6 +47,11 @@ class LikePosts extends Component
             session()->flash('error', 'like not found!');
         }
     }
+    public function clearSearch()
+    {
+        $this->search = '';
+        $this->searchTag(); 
+    }
     public function render()
     {
         $likes = Like::join('posts', 'posts.id', '=', 'likes.post_id')
@@ -51,10 +59,11 @@ class LikePosts extends Component
             ->where('posts.post_title', 'like', '%' . $this->search . '%')
             ->orderBy('likes.created_at', 'desc')
             ->paginate(6, ['likes.*','posts.id']);
-
+            $this->count = $likes->count();
         return view('livewire.like-posts', [
             'likes' => $likes,
-            'name' => $this->name
+            'name' => $this->name,
+            'count' => $this->count
         ]);
     }
 }

@@ -39,6 +39,9 @@ Route::get('/trending', [UserController::class, 'loadTrending']);
 Route::get('/trending/{tag_id}', [UserController::class, 'loadTrending']);
 Route::get('/view/profile/{user_id}', [UserController::class, 'loadGuestProfile']);
 Route::get('my/comments/{id}', [UserController::class, 'loadMyComments'])->middleware('user');
+Route::get('my/following/{id}', [UserController::class, 'loadMyFollowing'])->middleware('user');
+Route::get('my/like/{id}', [UserController::class, 'loadMyLike'])->middleware('user');
+Route::get('/view/guestpost/{user_id}', [UserController::class, 'loadGuestPosts'])->middleware('user');
 
 Route::get('/admin/home', [AdminController::class, 'loadHomePage'])->middleware('admin');
 Route::get('/admin/profile', [AdminController::class, 'loadProfile'])->middleware('admin')->name('profile.admin');

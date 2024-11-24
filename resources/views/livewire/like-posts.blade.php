@@ -8,8 +8,28 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="search-bar">
                     <form class="search-form d-flex align-items-center" wire:submit.prevent="searchTag">
-                        <input type="text" name="search" wire:model="search" placeholder="Search title" title="Enter search keyword">
-                        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                        <div class="position-relative">
+                            <input 
+                                type="text" 
+                                name="search" 
+                                wire:model="search" 
+                                placeholder="Search" 
+                                title="Enter search keyword" 
+                                class="form-control"
+                            >
+                            @if ($search)
+                                <button 
+                                    type="button" 
+                                    class="btn btn-clear position-absolute end-0 top-0" 
+                                    style="border: none; background: transparent; padding: 0.5rem;" 
+                                    wire:click="clearSearch">
+                                    ✖
+                                </button>
+                            @endif
+                        </div>
+                        <button type="submit" title="Search" class="btn btn-primary ms-2">
+                            <i class="bi bi-search"></i>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -36,8 +56,12 @@
                         <td>{{ $like->post->content }}</td>
                         <td>
                             <div class="d-flex justify-content-center">
+                                @if ($role)
                                 <a href="/admin/view/post/{{ $like->post->id }}" wire:navigate class="btn btn-primary btn-sm mx-1">View</a>
                                 <button wire:click="deleteLike({{$like->id}})" wire:confirm="Are you sure you want to delete this?" class="btn btn-danger btn-sm">Delete</button>
+                                @else
+                                <a href="/view/post/{{ $like->post->id }}" wire:navigate class="btn btn-primary btn-sm mx-1">View</a>
+                                @endif
                             </div>
                         </td>
                     </tr>

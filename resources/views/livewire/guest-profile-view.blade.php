@@ -11,7 +11,7 @@
      }
 
      .social-buttons {
-         display: grid !important;
+         display: grid ;
          grid-template-columns: repeat(2, 1fr);
          gap: 15px;
          justify-items: center;
@@ -21,20 +21,16 @@
      .social-buttons a {
          display: inline-block;
          font-size: 0.9rem;
-         /* Giảm kích thước font */
          font-weight: 600;
          padding: 8px 12px;
-         /* Giảm khoảng cách padding */
          border-radius: 8px;
          text-decoration: none;
          width: 120px;
-         /* Thu nhỏ width của nút */
          text-align: center;
          color: white;
          transition: all 0.3s ease;
          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
      }
-
      .btn-like {
          background-color: #0d6efd;
      }
@@ -72,14 +68,13 @@
          transform: scale(1.05);
      }
  </style>
- <div class="row">
+ <div class="row position-relative">
      <div class="col-xl-4">
 
          <div class="card">
              <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                  <img height="100px" width="100px" class="rounded-circle"
-
-                     src="{{ asset('storage/images/' . $user_data->image ?? "image_default.jpg")  }}" alt="profile image">
+                     src="{{ asset('storage/images/' . $user_data->image ?? 'image_default.jpg') }}" alt="profile image">
                  <h2>{{ $user_data->name ?? '' }}</h2>
                  <h4 class="text-muted">{{ $user_data->job }}</h4>
                  <div class="social-links mt-2 d-flex justify-content-center gap-4">
@@ -90,14 +85,31 @@
                  </div>
              </div>
              @if ($admin)
-             <div class="social-buttons mt-4">
-                 <a href="/admin/view/like/{{ $guestId }}" class="btn-like"><i class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
-                 <a href="/admin/view/guestpost/{{ $guestId }}" class="btn-post"><i class="bi bi-pencil-square"></i> Post</a>
-                 <a href="/admin/view/following/{{ $guestId }}" class="btn-follow mb-3"><i class="bi bi-person-plus"></i> Following</a>
-                 <a href="/admin/view/comment/{{ $guestId }}" wire:navigate class="btn-comment mb-3"><i class="bi bi-chat-dots"></i> Comment</a>
-             </div>
+                 <div class="social-buttons mt-4">
+                     <a href="/admin/view/like/{{ $guestId }}" class="btn-like"><i
+                             class="bi bi-hand-thumbs-up"></i> LikedPosts</a>
+                     <a href="/admin/view/guestpost/{{ $guestId }}" class="btn-post"><i
+                             class="bi bi-pencil-square"></i> Post</a>
+                     <a href="/admin/view/following/{{ $guestId }}" class="btn-follow mb-3"><i
+                             class="bi bi-person-plus"></i> Following</a>
+                     <a href="/admin/view/comment/{{ $guestId }}" wire:navigate class="btn-comment mb-3"><i
+                             class="bi bi-chat-dots"></i> Comment</a>
+                 </div>
+             @else
+                 <div class="">
+                     <div class="social-buttons" style="display:flex; justify-content:center;"><a href="/view/guestpost/{{ $guestId }}" class="btn-post mb-3"><i
+                        class="bi bi-pencil-square"></i>
+                    Post</a></div>
+                     {{-- <a href="#" wire:navigate class="btn-comment mb-3"></i> --}}
+                        
+                    {{-- </a> --}}
+                 </div>
+                 <div class="position-absolute top-0"><livewire:follow-component :followedId="$guestId" /> </div>    
+
              @endif
+
              <livewire:follow-component :followedId="$guestId" />
+
          </div>
 
      </div>
@@ -105,7 +117,7 @@
      <div class="col-xl-8">
 
          <div class="card">
-             <div class="card-body pt-3">
+             <div class="card-body pt-3 ">
                  <!-- Bordered Tabs -->
                  <ul class="nav nav-tabs nav-tabs-bordered">
 

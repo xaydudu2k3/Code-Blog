@@ -113,4 +113,28 @@ class UserController extends Controller
         $userId = $user_Id;
         return view('user.my-comment', compact('logged_user', 'user_image', 'userId'));
     }
+    public function loadMyFollowing($user_Id)
+    {
+        $logged_user = Auth::user();
+        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+        $user_image = $user_profile_data->image ?? 'images_default.jpg';
+        $userId = $user_Id;
+        return view('user.my-following', compact('logged_user', 'user_image', 'userId'));
+    }
+    public function loadMyLike($user_id)
+    {
+        $logged_user = Auth::user();
+        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+        $user_image = $user_profile_data->image ?? 'images_default.jpg';
+        $userId = $user_id;
+        return view('user.my-like', compact('logged_user', 'user_image', 'userId'));
+    }
+    public function loadGuestPosts($user_id)
+    {
+        $logged_user = Auth::user();
+        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+        $user_image = $user_profile_data->image ?? 'images_default.jpg';
+        $userId = $user_id;
+        return view('user.guest-posts', compact('logged_user', 'user_image', 'userId'));
+    }
 }
