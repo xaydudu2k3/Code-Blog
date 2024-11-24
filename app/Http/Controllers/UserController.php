@@ -132,9 +132,12 @@ class UserController extends Controller
     public function loadGuestPosts($user_id)
     {
         $logged_user = Auth::user();
-        $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
-        $user_image = $user_profile_data->image ?? 'images_default.jpg';
         $userId = $user_id;
-        return view('user.guest-posts', compact('logged_user', 'user_image', 'userId'));
+        if ($logged_user) {
+            $user_profile_data = UserProfile::where('user_id', $logged_user->id)->first();
+            $user_image = $user_profile_data->image ?? 'images_default.jpg';
+            return view('user.guest-posts', compact('logged_user', 'user_image', 'userId'));
+        }
+        return view('user.guest-posts', compact('userId'));
     }
 }
