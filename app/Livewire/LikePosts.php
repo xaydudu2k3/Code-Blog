@@ -58,7 +58,7 @@ class LikePosts extends Component
             ->where('likes.user_id', $this->user_id)
             ->where('posts.post_title', 'like', '%' . $this->search . '%')
             ->orderBy('likes.created_at', 'desc')
-            ->paginate(6, ['likes.*','posts.id']);
+            ->paginate(8, ['likes.*','posts.id']);
             $this->count = $likes->count();
         return view('livewire.like-posts', [
             'likes' => $likes,

@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Post;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UserComment extends Component
 {
@@ -48,7 +49,6 @@ class UserComment extends Component
         $this->cmts = Comment::where('user_id', $this->userId)
             ->where('comment', 'like', '%' . $this->search . '%')
             ->get();
-        $this->count = $this->cmts->count();
     }
 
     public function clearSearch()
@@ -59,8 +59,12 @@ class UserComment extends Component
 
     public function render()
     {
+        $this->count = $this->cmts->count();
+        $cmts = Comment::where('user_id', $this->userId)
+            ->where('comment', 'like', '%' . $this->search . '%')
+            ->paginate(6);
         return view('livewire.user-comment', [
-            'comments' => $this->cmts,
+            'comments' => $cmts,
             'name' => $this->name,
             'count' =>"$this->count",
             "search" => "$this->search",

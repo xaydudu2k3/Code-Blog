@@ -72,7 +72,9 @@
                 @endforeach
             </tbody>
         </table>
-
+        <div class="d-flex justify-content-center">
+            {{ $comments->links() }}
+        </div>
         @if ($comments->isEmpty())
         <p class="text-muted">No comments found for this user.</p>
         @endif
