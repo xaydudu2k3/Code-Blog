@@ -1,5 +1,5 @@
 <div class="news">
-    @if (auth()->user()->role == 0)
+
     @foreach ($related_posts as $item)
     <div class="post-item clearfix" wire:key="{{$item->id}}">-
     <div class="row">
@@ -14,7 +14,7 @@
         
     </div>
 @endforeach
-    @endif
+
     
 
 </div>
