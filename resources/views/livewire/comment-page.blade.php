@@ -47,9 +47,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($comments as $comment)
+                    @foreach($comments as $idx => $comment)
                     <tr class="text-center">
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $comments->firstItem() + $idx }}</td>
                         <td>{{ $comment->user->name ?? 'N/A' }}</td>
                         <td>{{ $comment->post->post_title }}</td>
                         <td>{{ $comment->comment}}</td>
@@ -69,6 +69,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center">
+                {{ $comments->links() }}
+            </div>
         </div>
         <!-- /.card-body -->
     </div>

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Comment;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CommentPage extends Component
 {
@@ -30,9 +31,7 @@ class CommentPage extends Component
   }
   public function searchComment()
   {
-    // Tìm kiếm các Comment theo giá trị search
-    $this->comment_data = Comment::where('comment', 'like', '%' . $this->search . '%')->get();
-    $this->count = $this->comment_data->count();
+    $this->render();
   }
   public function clearSearch()
     {
@@ -41,9 +40,11 @@ class CommentPage extends Component
     }
 
   public function render()
-  {
+  { 
+    $this->count = $this->comment_data->count();
+    $cmts = Comment::where('comment', 'like', '%' . $this->search . '%')->paginate(6);
     return view('livewire.comment-page', [
-      'comments' => $this->comment_data,
+      'comments' => $cmts,
       'count' => "$this->count"
     ]);
   }
