@@ -10,7 +10,7 @@
     </form>
     @else
     <div class="mb-3">
-        <textarea class="form-control" placeholder="Vui lòng đăng nhập để bình luận..." disabled></textarea>
+        <textarea class="form-control" placeholder="Please login to comment..." disabled></textarea>
     </div>
     <button class="btn btn-primary" disabled>Publish</button>
     @endif
