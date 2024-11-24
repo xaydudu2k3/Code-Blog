@@ -74,7 +74,7 @@
                                 <a href="/admin/view/post/{{ $post->id }}" wire:navigate class="btn btn-primary btn-sm mx-1">View</a>
                                 <button wire:click="deletePost({{$post->id}})" wire:confirm="Are you sure you want to delete this?" class="btn btn-danger btn-sm">Delete</button>
                                 @else
-                                <a href="view/post/{{ $post->id }}" wire:navigate class="btn btn-primary btn-sm mx-1">View</a>
+                                <a href="/view/post/{{ $post->id }}" wire:navigate class="btn btn-primary btn-sm mx-1">View</a>
                                 @endif
                             </div>
                         </td>
