@@ -46,6 +46,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Image</th>
                     <th scope="col">Content</th>
+                    <th scope="col">Active</th>
                     <th scope="col">Posted At</th>
                     <th scope="col">Last Updated</th>
                     <th scope="col" colspan="2">Actions</th>
@@ -60,6 +61,7 @@
                         <td><img height="40px" width="40px" src="{{ asset('storage/images/' . $item->photo . '') }}"
                                 alt="post image"></td>
                         <td>{{ str($item->content)->words(10) }}</td>
+                        <td class="text-center">{!! $item->active ? '&#10004;' : '&#10008;' !!}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td><a href="/edit/post/{{ $item->id }}" class="btn btn-primary btn-sm">Edit</a></td>

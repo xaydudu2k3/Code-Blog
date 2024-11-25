@@ -53,7 +53,7 @@
                         <td>
                             <img height="40px" width="40px" src="{{ asset('storage/images/' .$like->post->photo.'') }}" alt="like image">
                         </td>
-                        <td>{{ $like->post->content }}</td>
+                        <td>{{ str($like->post->content)->words(10) }}</td>
                         <td>
                             <div class="d-flex justify-content-center">
                                 @if ($role)

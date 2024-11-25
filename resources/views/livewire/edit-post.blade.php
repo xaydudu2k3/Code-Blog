@@ -36,10 +36,11 @@
             </div>
             <div class="col-sm-10">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" wire:model="content" value="{{ $post->content }}"
-                        id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Your post goes here.. </label>
+                    <textarea class="form-control" wire:model="content" id="floatingTextarea" placeholder="Your post goes here.."
+                        rows="5">{{ $post->content }}</textarea>
+                    <label for="floatingTextarea">Your post goes here..</label>
                 </div>
+
                 @error('content')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -62,5 +63,3 @@
     </form>
 </div>
 </div>
-
-

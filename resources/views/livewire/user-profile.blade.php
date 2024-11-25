@@ -83,10 +83,10 @@
                 <h2>{{ $user_data->name ?? '' }}</h2>
                 <h4 class="text-muted">{{ $user_data->job }}</h4>
                 <div class="social-links mt-2 d-flex justify-content-center gap-4">
-                    <a href="#" class="social-icon twitter"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="social-icon facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="social-icon instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-icon linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="{{ $user_data->twitter }}" class="social-icon twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="{{ $user_data->facebook }}" class="social-icon facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="{{ $user_data->instagram }}" class="social-icon instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="{{ $user_data->linkedin }}" class="social-icon linkedin"><i class="bi bi-linkedin"></i></a>
                 </div>
             </div>
             <div class="social-buttons mt-4">

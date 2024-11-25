@@ -10,7 +10,9 @@
             </select> --}}
         </div>
         {{-- here we will loop through all posts.. --}}
-
+        @if (count($pposts) == 0)
+            <div class="text-center">There are no posts yet!</div>
+        @endif
         @foreach ($pposts as $post)
         @if ($post->active)
         <div class="col-xxl-4  col-md-6 col-sm-12 mb-4">

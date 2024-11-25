@@ -56,7 +56,7 @@
                         <td>
                             <img height="40px" width="40px" src="{{ asset('storage/images/' .$post->photo.'') }}" alt="post image">
                         </td>
-                        <td>{{ $post->content }}</td>
+                        <td>{{ str($post->content)->words(10) }}</td>
                         @if ($role)
                         <td>
                             <input

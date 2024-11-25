@@ -42,7 +42,7 @@ class CommentPage extends Component
   public function render()
   { 
     $this->count = $this->comment_data->count();
-    $cmts = Comment::where('comment', 'like', '%' . $this->search . '%')->paginate(6);
+    $cmts = Comment::where('comment', 'like', '%' . $this->search . '%')->orderBy('created_at', 'desc')->paginate(6);
     return view('livewire.comment-page', [
       'comments' => $cmts,
       'count' => "$this->count"

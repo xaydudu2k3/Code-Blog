@@ -8,7 +8,7 @@
             wire:click="addViewers({{ $post->id }})">
             <img src="{{ asset('storage/images/' . $post->photo) }}" width="50px" height="50px"
                 alt="Post Image" class="post-img">
-            <strong>{{ $post->post_title }}</strong> by {{ $post->user->name }}
+            <strong>{{ str($post->post_title)->words(5) }}</strong> by {{ $post->user->name }}
             <br>
             Tags:
             @foreach ($post->tags as $tag)
