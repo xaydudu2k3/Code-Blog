@@ -49,6 +49,9 @@
                 </thead>
                 <tbody>
                     @foreach($posts as $idx => $post)
+                    @if (!$post->active)
+                        @continue
+                    @endif
                     <tr class=" text-center">
                         <td>{{ $posts->firstItem() + $idx }}</td>
                         <td>{{ $post->post_title }}</td>

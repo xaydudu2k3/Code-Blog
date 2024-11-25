@@ -27,6 +27,7 @@ class UserFollowedNotification extends Notification
             'message' => "{$this->follower->name} has followed you.",
             'user_id' => $this->follower->id,
             'user_name' => $this->follower->name,
+            'fl' => 1
         ];
     }
 }

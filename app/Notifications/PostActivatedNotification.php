@@ -3,19 +3,16 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostLikedNotification extends Notification
+class PostActivatedNotification extends Notification
 {
     use Queueable;
 
-    private $user;
     private $post;
 
-    public function __construct($user, $post)
+    public function __construct($post)
     {
-        $this->user = $user;
         $this->post = $post;
     }
 
@@ -27,12 +24,10 @@ class PostLikedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => "{$this->user->name} your post was liked by: {$this->post->post_title}",
-            'user_name' => $this->user->name,
-            'user_id' => $this->user->id,
+            'message' => "Your post '{$this->post->post_title}' has been activated by admin.",
             'post_title' => $this->post->post_title,
             'post_id' => $this->post->id,
-            'like' => 1,
+            'act' => 1
         ];
     }
 }

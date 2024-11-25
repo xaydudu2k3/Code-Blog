@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\PostActivatedNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,5 +40,14 @@ class Post extends Model
     }
     public function comments() {
         return $this->hasMany(Comment::class);
+    }
+    protected static function booted()
+    {
+        static::updated(function ($post) {
+            if ($post->isDirty('active') && $post->active) { // Kiểm tra nếu cột active được thay đổi thành true
+                // Gửi thông báo tới người sở hữu bài viết
+                $post->user->notify(new PostActivatedNotification($post));
+            }
+        });
     }
 }
