@@ -27,7 +27,7 @@ class PostLikedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => "{$this->user->name} đã thích bài viết của bạn: {$this->post->post_title}",
+            'message' => "{$this->user->name} your post was liked by: {$this->post->post_title}",
             'user_name' => $this->user->name,
             'user_id' => $this->user->id,
             'post_title' => $this->post->post_title,

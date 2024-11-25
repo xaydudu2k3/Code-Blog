@@ -25,7 +25,7 @@ class TagsPage extends Component
   {
     $tags = Tag::where('name', 'like', '%' . $this->search . '%')
       ->orderBy('created_at', 'desc')
-      ->paginate(2);
+      ->paginate(5);
 
     return view('livewire.tags-page', [
       'tags' => $tags

@@ -53,7 +53,7 @@
                 @foreach ($comments as $comment)
                 <tr class="text-center">
                     <td>{{ $comment->post->post_title ?? 'Post Deleted' }}</td>
-                    <td>{{ $comment->comment ?? 'Post Deleted' }}</td>
+                    <td>{{ str($comment->comment)->words(10) ?? 'Post Deleted' }}</td>
                     <td>{{ $comment->created_at->format('d-m-Y H:i') }}</td>
                     <td>
                         <div class="d-flex justify-content-center">

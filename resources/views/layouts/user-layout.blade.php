@@ -165,8 +165,8 @@
                     </ul><!-- End Notification Dropdown Items --> --}}
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                         <li class="dropdown-header">
-                            Bạn có {{ auth()->user()->unreadNotifications->count() }} thông báo mới
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Xem tất cả</span></a>
+                            You have {{ auth()->user()->unreadNotifications->count() }} new notifications
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -183,7 +183,7 @@
                                 <a href="/view/profile/{{ $data['user_id'] }}" wire:navigate>
                                     <strong>{{ $data['user_name'] }}</strong>
                                 </a>
-                                đã thích bài viết của bạn:
+                                liked your post:
                                 <a href="/view/post/{{ $data['post_id'] }}" wire:navigate
                                     wire:click="addViewers({{ $data['post_id'] }})">
                                     <strong>{{ $data['post_title'] }}</strong>
@@ -193,11 +193,11 @@
                             @elseif(isset($notification->data['message']))
                             <i class="bi bi-person-plus text-success"></i> {{-- Icon theo dõi --}}
                             <div>
-                                <h4>Người theo dõi mới</h4>
+                                <h4>New Follower</h4>
                                 <a href="/view/profile/{{ $data['user_id'] }}">
                                     <strong>{{ $data['user_name'] }}</strong>
                                 </a>
-                                đã theo dõi bạn.
+                                followed you.
                                 <p>{{ $notification->created_at->diffForHumans() }}</p>
                             </div>
                             @endif
@@ -208,13 +208,13 @@
                         @empty
                         <li class="notification-item">
                             <div>
-                                <p>Bạn không có thông báo mới.</p>
+                                <p>You have no new notifications.</p>
                             </div>
                         </li>
                         @endforelse
 
                         <li class="dropdown-footer">
-                            <a href="{{ route('notifications.markAllAsRead') }}">Đánh dấu tất cả là đã đọc</a>
+                            <a href="{{ route('notifications.markAllAsRead') }}">Mark all as read</a>
                         </li>
                     </ul>
 

@@ -40,8 +40,7 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role ? "ADMIN" : "USER"}}</td>
-                    <td><a href="/admin/view/profile/{{ $user->id }}" wire:navigate class="btn btn-primary btn-sm">View</a></td>
-                    <td><button wire:confirm="Are you sure you want to delete this?" class="btn btn-danger btn-sm" wire:click="deleteUser({{ $user->id }})">Delete</button></td>
+                    <td><a href="/admin/view/profile/{{ $user->id }}" wire:navigate class="btn btn-primary btn-sm">View</a><button wire:confirm="Are you sure you want to delete this?" class="btn btn-danger btn-sm ml-3" wire:click="deleteUser({{ $user->id }})">Delete</button></td>
                   </tr>
               @endforeach
             </tbody>

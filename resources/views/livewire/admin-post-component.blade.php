@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        {{ $post->content }}
+                        {{ str($post->content)->words(5) }}
                     </div>
                     <div class="col-md-2">
                         <div class="form-check form-switch d-inline-block">

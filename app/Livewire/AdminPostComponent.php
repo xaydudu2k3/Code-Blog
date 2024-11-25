@@ -54,7 +54,7 @@ class AdminPostComponent extends Component
     }
     public function render()
     {
-        $posts = Post::paginate(6);
+        $posts = Post::paginate(10);
         $count = $posts->count();
         return view('livewire.admin-post-component', [
             'posts' => $posts,
