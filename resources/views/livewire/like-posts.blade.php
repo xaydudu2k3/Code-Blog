@@ -9,22 +9,21 @@
                 <div class="search-bar">
                     <form class="search-form d-flex align-items-center" wire:submit.prevent="searchTag">
                         <div class="position-relative">
-                            <input 
-                                type="text" 
-                                name="search" 
-                                wire:model="search" 
-                                placeholder="Search" 
-                                title="Enter search keyword" 
-                                class="form-control"
-                            >
+                            <input
+                                type="text"
+                                name="search"
+                                wire:model="search"
+                                placeholder="Search"
+                                title="Enter search keyword"
+                                class="form-control">
                             @if ($search)
-                                <button 
-                                    type="button" 
-                                    class="btn btn-clear position-absolute end-0 top-0" 
-                                    style="border: none; background: transparent; padding: 0.5rem;" 
-                                    wire:click="clearSearch">
-                                    ✖
-                                </button>
+                            <button
+                                type="button"
+                                class="btn btn-clear position-absolute end-0 top-0"
+                                style="border: none; background: transparent; padding: 0.5rem;"
+                                wire:click="clearSearch">
+                                ✖
+                            </button>
                             @endif
                         </div>
                         <button type="submit" title="Search" class="btn btn-primary ms-2">
@@ -38,7 +37,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">STT</th>
+                        <th class="text-center">#</th>
                         <th class="text-center">Title</th>
                         <th class="text-center">Image</th>
                         <th class="text-center">Content</th>
@@ -46,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($likes as $idx => $like)
+                    @foreach($likes as $idx => $like)
                     <tr class=" text-center">
                         <td>{{ $likes->firstItem() + $idx }}</td>
                         <td>{{ $like->post->post_title }}</td>

@@ -21,6 +21,12 @@ class TagsPage extends Component
     $this->searchTag();
   }
 
+  public function clearSearch()
+  {
+    $this->search = '';
+    $this->render();
+  }
+
   public function render()
   {
     $tags = Tag::where('name', 'like', '%' . $this->search . '%')
